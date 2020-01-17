@@ -1,0 +1,4 @@
+enum MoedaType{
+  Cara,
+  Coroa
+}
