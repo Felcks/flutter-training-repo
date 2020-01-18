@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:youtube/Api.dart';
 import 'package:youtube/CustomSearchDelegate.dart';
 import 'package:youtube/telas/Biblioteca.dart';
 import 'package:youtube/telas/EmAlta.dart';
@@ -40,6 +39,8 @@ class _HomeState extends State<Home> {
         ),
         title:  Image.asset(
           "images/youtube_dark.png",
+          width: 100,
+          height: 80,
         ),
         actions: <Widget>[
 
