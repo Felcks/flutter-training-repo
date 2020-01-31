@@ -20,8 +20,8 @@ class Api{
     List<BrandResponse> brandList;
     if(response.statusCode == 200){
 
-      Map parsed = json.decode(response.body);
-//      brandList = parsed.forEach((key, value) => brandList.fromJson(value))
+      Iterable parsed = json.decode(response.body);
+      brandList = parsed.map((model) => BrandResponse.fromJson(model)).toList();
     }
     else{
       print("error ${response.body}");

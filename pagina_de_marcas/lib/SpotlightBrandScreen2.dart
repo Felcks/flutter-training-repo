@@ -5,14 +5,14 @@ import 'package:side_header_list_view/side_header_list_view.dart';
 
 import 'Api.dart';
 
-class SpotlightBrandScreen extends StatefulWidget {
+class SpotlightBrandScreen2 extends StatefulWidget {
   @override
   _SpotlightBrandScreenState createState() => _SpotlightBrandScreenState();
 }
 
 
 
-class _SpotlightBrandScreenState extends State<SpotlightBrandScreen> {
+class _SpotlightBrandScreenState extends State<SpotlightBrandScreen2> {
 
   Api api = Api();
 
@@ -65,18 +65,8 @@ class _SpotlightBrandScreenState extends State<SpotlightBrandScreen> {
                 print(snapshot.error);
               }
               else {
-                return SideHeaderListView(
+                return ListView.builder(
                   itemCount: snapshot.data.length,
-                  itemExtend: 50.0,
-                  headerBuilder: (BuildContext context, int index){
-                    return Text((
-                        snapshot.data[index] as BrandResponse).Name[0],
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14,
-                      ),
-                    );
-                  },
                   itemBuilder: (context, index) {
                     BrandResponse brand = snapshot.data[index];
 
@@ -93,9 +83,6 @@ class _SpotlightBrandScreenState extends State<SpotlightBrandScreen> {
                         ),
                       ),
                     );
-                  },
-                  hasSameHeader: (int a, int b){
-                    return removeDiacritics((snapshot.data[a] as BrandResponse).Name)[0] == removeDiacritics((snapshot.data[b] as BrandResponse).Name)[0];
                   },
                 );
               }

@@ -8,5 +8,12 @@ class BrandResponse{
 
   int Id;
   String Name;
-  int Active;
+  bool Active;
+
+  BrandResponse();
+
+  factory BrandResponse.fromJson(Map<String, dynamic> json) =>
+      _$BrandResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BrandResponseToJson(this);
 }
