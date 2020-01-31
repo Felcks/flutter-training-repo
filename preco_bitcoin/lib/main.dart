@@ -50,7 +50,7 @@ class _BitcoinHomeState extends State<BitcoinHome> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 40),
                 child:  Text(
-                  _precoAtual.toString(),
+                  "RS ${_precoAtual.toString()}",
                   style: TextStyle(
                     fontSize: 30,
                   ),
@@ -65,7 +65,7 @@ class _BitcoinHomeState extends State<BitcoinHome> {
                     "Atualizar",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 30,
                     ),
                   ),
                 )
