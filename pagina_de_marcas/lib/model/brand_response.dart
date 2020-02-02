@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'BrandResponse.g.dart';
+part 'brand_response.g.dart';
 
 @JsonSerializable()
 
@@ -9,6 +9,7 @@ class BrandResponse{
   int Id;
   String Name;
   bool Active;
+  String ImageUrl;
 
   BrandResponse();
 
