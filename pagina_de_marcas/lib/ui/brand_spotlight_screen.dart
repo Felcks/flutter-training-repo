@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/api/api.dart';
-import 'package:pagina_de_marcas/model/brand_response.dart';
+import 'package:pagina_de_marcas/model/brand/brand_response.dart';
 import 'package:pagina_de_marcas/ui/brand_list_screen.dart';
 
 import '../colors.dart';
@@ -83,7 +83,7 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                                   onTap: (){
                                     Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => BrandPageScreen())
+                                        MaterialPageRoute(builder: (context) => BrandPageScreen(brand.Name))
                                     );
                                   },
                                   child: Container(
