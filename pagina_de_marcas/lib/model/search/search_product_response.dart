@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pagina_de_marcas/model/product_response.dart';
+import 'package:pagina_de_marcas/model/product/product_response.dart';
 
 part 'search_product_response.g.dart';
 

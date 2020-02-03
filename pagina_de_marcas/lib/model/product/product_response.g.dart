@@ -12,11 +12,15 @@ ProductResponse _$ProductResponseFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : SkuResponse.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..Name = json['Name'] as String;
+    ..Name = json['Name'] as String
+    ..RatingResume = json['RatingResume'] == null
+        ? null
+        : RatingResponse.fromJson(json['RatingResume'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$ProductResponseToJson(ProductResponse instance) =>
     <String, dynamic>{
       'Skus': instance.Skus,
       'Name': instance.Name,
+      'RatingResume': instance.RatingResume,
     };

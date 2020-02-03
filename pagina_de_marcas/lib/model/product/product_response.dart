@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pagina_de_marcas/model/sku_response.dart';
+import 'package:pagina_de_marcas/model/product/rating_response.dart';
+import 'package:pagina_de_marcas/model/product/sku_response.dart';
 
 part 'product_response.g.dart';
 
@@ -10,6 +11,7 @@ class ProductResponse{
 
   List<SkuResponse> Skus;
   String Name;
+  RatingResponse RatingResume;
 
   ProductResponse();
 

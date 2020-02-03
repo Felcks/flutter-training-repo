@@ -35,11 +35,11 @@ class _BrandListScreenState extends State<BrandListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Todas as marcas"),
       ),
       body: Container(
-        color: Colors.white,
         padding: EdgeInsets.all(16),
         child: FutureBuilder(
           future: brandList,
@@ -92,7 +92,7 @@ class _BrandListScreenState extends State<BrandListScreen> {
                             MaterialPageRoute(builder: (context) => BrandPageScreen(brand.Name))
                           );
                         },
-                        child: Padding(
+                        child: Container(
                           padding: EdgeInsets.all(16),
                           child: Text(
                             brand.Name,

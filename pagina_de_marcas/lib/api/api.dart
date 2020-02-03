@@ -4,9 +4,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:pagina_de_marcas/model/brand/brand_response.dart';
-import 'package:pagina_de_marcas/model/search_product_response.dart';
+import 'package:pagina_de_marcas/model/search/search_product_response.dart';
 
-import 'package:pagina_de_marcas/model/search_product_request.dart';
+import 'package:pagina_de_marcas/model/search/search_product_request.dart';
 
 const URL_BASE = "api-homolog-epocacosmeticosv2.mobfiq.com.br";
 
@@ -50,6 +50,7 @@ class Api{
     );
 
     Map parsed = json.decode(response.body);
+
     return SearchProductResponse.fromJson(parsed);
   }
 }
