@@ -28,6 +28,21 @@ class Api{
 
       Iterable parsed = json.decode(response.body);
       brandList = parsed.map((model) => BrandResponse.fromJson(model)).toList();
+      print(brandList.first.Name);
+
+      int maxCharacterValue = 'z'.codeUnitAt(0);
+      int minCharacterValue = 'A'.codeUnitAt(0);
+
+      brandList.sort((a, b) {
+
+        int aCharacterValue = a.Name.toUpperCase().codeUnitAt(0);
+        int bCharacterValue = b.Name.toUpperCase().codeUnitAt(0);
+
+        return (aCharacterValue + ((aCharacterValue < minCharacterValue) ? maxCharacterValue : 0))
+            .compareTo(bCharacterValue + ((bCharacterValue < minCharacterValue) ? maxCharacterValue : 0));
+        }
+      );
+      print(brandList.first.Name);
     }
     else{
       print("error ${response.body}");
