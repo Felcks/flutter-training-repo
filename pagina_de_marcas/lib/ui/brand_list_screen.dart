@@ -181,7 +181,10 @@ class _BrandListScreenState extends State<BrandListScreen> {
                           itemCount: list.length,
                           itemExtend: 50.0,
                           headerBuilder: (BuildContext context, int index){
-                            return Text(list[index].Name[0],
+
+                            String headerText = (removeDiacritics(list[index].Name).toUpperCase().codeUnitAt(0) < 'A'.codeUnitAt(0))? "#" : removeDiacritics(list[index].Name[0]).toUpperCase();
+
+                            return Text(headerText,
                               style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 14,
@@ -211,7 +214,16 @@ class _BrandListScreenState extends State<BrandListScreen> {
                             );
                           },
                           hasSameHeader: (int a, int b){
-                            return removeDiacritics(list[a].Name)[0] == removeDiacritics(list[b].Name)[0];
+
+                            int aCharacterValue = removeDiacritics(list[a].Name).toUpperCase().codeUnitAt(0);
+                            int bCharacterValue = removeDiacritics(list[b].Name).toUpperCase().codeUnitAt(0);
+
+                            int minCharacterValue = 'A'.codeUnitAt(0);
+
+                            aCharacterValue = ((aCharacterValue < minCharacterValue) ? 999 : aCharacterValue);
+                            bCharacterValue = ((bCharacterValue < minCharacterValue) ? 999 : bCharacterValue);
+
+                            return aCharacterValue == bCharacterValue;
                           },
                         ),
                       ) ,

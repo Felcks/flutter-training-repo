@@ -7,6 +7,7 @@ import 'package:pagina_de_marcas/colors.dart';
 import 'package:pagina_de_marcas/model/product/product_response.dart';
 import 'package:pagina_de_marcas/model/product/sku_response.dart';
 import 'package:pagina_de_marcas/model/search/search_product_response.dart';
+import 'package:pagina_de_marcas/ui/product_screen.dart';
 import 'package:pagina_de_marcas/ui/star_display.dart';
 
 class BrandPageScreen extends StatefulWidget {
@@ -146,142 +147,150 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
 
                                         SkuResponse sku = product.Skus[0];
 
-                                        return Container(
-                                            margin: EdgeInsets.all(3),
-                                            padding: EdgeInsets.symmetric(vertical: 16),
-                                            width: 170,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(0),
-                                                color: Colors.white,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color: Colors.grey[300],
-                                                      blurRadius: 3.0
-                                                  )
-                                                ]
-                                            ),
-                                            child: Stack(
-                                              children: <Widget>[
-                                                Align(
-                                                  alignment: Alignment.topCenter,
-                                                  child: Column(
-                                                    children: <Widget>[
-                                                      Container(
-                                                        height: 200,
-                                                        width: 500,
-                                                        decoration: BoxDecoration(
-                                                            image: DecorationImage(
-                                                                fit: BoxFit.contain,
-                                                                image: NetworkImage(
-                                                                    product.Skus[0].Images[0].ImageUrl
+                                        return InkWell(
+                                          onTap: (){
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(builder: (context) => ProductScreen(product))
+                                            );
+                                          },
+                                          child: Container(
+                                              margin: EdgeInsets.all(3),
+                                              padding: EdgeInsets.symmetric(vertical: 16),
+                                              width: 170,
+                                              decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(0),
+                                                  color: Colors.white,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                        color: Colors.grey[300],
+                                                        blurRadius: 3.0
+                                                    )
+                                                  ]
+                                              ),
+                                              child: Stack(
+                                                children: <Widget>[
+                                                  Align(
+                                                      alignment: Alignment.topCenter,
+                                                      child: Column(
+                                                        children: <Widget>[
+                                                          Container(
+                                                            height: 200,
+                                                            width: 500,
+                                                            decoration: BoxDecoration(
+                                                                image: DecorationImage(
+                                                                    fit: BoxFit.contain,
+                                                                    image: NetworkImage(
+                                                                        product.Skus[0].Images[0].ImageUrl
+                                                                    )
                                                                 )
-                                                            )
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.all(16),
-                                                        child: Text(
-                                                          product.Name,
-                                                          maxLines: 3,
-                                                          textAlign: TextAlign.center,
-                                                          style: TextStyle(
-                                                            color: Colors.black,
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.only(top: 0),
-                                                        child: Row(
-                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                          children: <Widget>[
-                                                            StarDisplayWidget(
-                                                              value: product.RatingResume.Average,
-                                                              filledStar: Icon(
-                                                                Icons.star,
-                                                                color: Colors.yellow[700],
-                                                                size: 17,
-                                                              ),
-                                                              unfilledStar: Icon(
-                                                                Icons.star,
-                                                                color: Colors.grey[300],
-                                                                size: 17,
-                                                              ),
-                                                              halfStar: Icon(
-                                                                Icons.star_half,
-                                                                color: Colors.yellow[700],
-                                                                size: 17,
+                                                          Padding(
+                                                            padding: EdgeInsets.all(16),
+                                                            child: Text(
+                                                              product.Name,
+                                                              maxLines: 3,
+                                                              textAlign: TextAlign.center,
+                                                              style: TextStyle(
+                                                                color: Colors.black,
                                                               ),
                                                             ),
-                                                            Padding(
-                                                              padding: EdgeInsets.only(left: 8),
-                                                              child: Text(
-                                                                "(${product.RatingResume.Count})",
-                                                                maxLines: 3,
-                                                                textAlign: TextAlign.center,
-                                                                style: TextStyle(
-                                                                    color: Colors.grey,
-                                                                    fontSize: 14
-                                                                ),
+                                                          ),
+                                                          Padding(
+                                                              padding: EdgeInsets.only(top: 0),
+                                                              child: Row(
+                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                children: <Widget>[
+                                                                  StarDisplayWidget(
+                                                                    value: product.RatingResume.Average,
+                                                                    filledStar: Icon(
+                                                                      Icons.star,
+                                                                      color: Colors.yellow[700],
+                                                                      size: 17,
+                                                                    ),
+                                                                    unfilledStar: Icon(
+                                                                      Icons.star,
+                                                                      color: Colors.grey[300],
+                                                                      size: 17,
+                                                                    ),
+                                                                    halfStar: Icon(
+                                                                      Icons.star_half,
+                                                                      color: Colors.yellow[700],
+                                                                      size: 17,
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsets.only(left: 8),
+                                                                    child: Text(
+                                                                      "(${product.RatingResume.Count})",
+                                                                      maxLines: 3,
+                                                                      textAlign: TextAlign.center,
+                                                                      style: TextStyle(
+                                                                          color: Colors.grey,
+                                                                          fontSize: 14
+                                                                      ),
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              )
+                                                          ),
+                                                          Padding(
+                                                            padding: EdgeInsets.only(top: 16),
+                                                            child: Text(
+                                                              "R\$ ${sku.Sellers[0].ListPrice.toString()}",
+                                                              maxLines: 3,
+                                                              textAlign: TextAlign.center,
+                                                              style: TextStyle(
+                                                                  color: Colors.grey,
+                                                                  fontSize: 12
                                                               ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding: EdgeInsets.only(top: 4),
+                                                            child: Text(
+                                                              "R\$ ${sku.Sellers[0].Price.toString()}",
+                                                              maxLines: 5,
+                                                              textAlign: TextAlign.center,
+                                                              style: TextStyle(
+                                                                  color: MyColors.pink,
+                                                                  fontSize: 20,
+                                                                  fontWeight: FontWeight.bold
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      )
+                                                  ),
+                                                  Align(
+                                                      alignment: Alignment.bottomCenter,
+                                                      child: Container(
+                                                        padding: EdgeInsets.symmetric(horizontal: 8),
+                                                        width: 200,
+                                                        child: RaisedButton(
+                                                            onPressed: () {
+                                                            },
+                                                            child: Text(
+                                                              "COMPRAR",
+                                                              style: TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: 16
+                                                              ),
+                                                            ),
+                                                            highlightColor: Colors.white54,
+                                                            splashColor: Colors.white54,
+                                                            color: MyColors.pink,
+                                                            padding: EdgeInsets.all(8),
+                                                            shape: RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(32),
                                                             )
-                                                          ],
-                                                        )
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.only(top: 16),
-                                                        child: Text(
-                                                          "R\$ ${sku.Sellers[0].ListPrice.toString()}",
-                                                          maxLines: 3,
-                                                          textAlign: TextAlign.center,
-                                                          style: TextStyle(
-                                                            color: Colors.grey,
-                                                            fontSize: 12
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.only(top: 4),
-                                                        child: Text(
-                                                          "R\$ ${sku.Sellers[0].Price.toString()}",
-                                                          maxLines: 5,
-                                                          textAlign: TextAlign.center,
-                                                          style: TextStyle(
-                                                              color: MyColors.pink,
-                                                              fontSize: 20,
-                                                              fontWeight: FontWeight.bold
-                                                          ),
                                                         ),
                                                       )
-                                                    ],
                                                   )
-                                                ),
-                                                Align(
-                                                  alignment: Alignment.bottomCenter,
-                                                  child: Container(
-                                                    padding: EdgeInsets.symmetric(horizontal: 8),
-                                                    width: 200,
-                                                    child: RaisedButton(
-                                                        onPressed: () {
-                                                        },
-                                                        child: Text(
-                                                          "COMPRAR",
-                                                          style: TextStyle(
-                                                              color: Colors.white,
-                                                              fontSize: 16
-                                                          ),
-                                                        ),
-                                                        highlightColor: Colors.white54,
-                                                        splashColor: Colors.white54,
-                                                        color: MyColors.pink,
-                                                        padding: EdgeInsets.all(8),
-                                                        shape: RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(32),
-                                                        )
-                                                    ),
-                                                  )
-                                                )
-                                              ],
-                                            )
+                                                ],
+                                              )
+                                          ),
                                         );
                                       }
                                   ),
