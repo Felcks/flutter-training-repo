@@ -28,6 +28,8 @@ dependencies:
   side_header_list_view: 0.0.4
   diacritic: 0.1.1
   decimal: ^0.3.0
+  mobx:
+  flutter_mobx:
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +37,7 @@ dev_dependencies:
 
   build_runner: 1.6.5
   json_serializable: 3.2.0
+  mobx_codegen:
 
 
 

@@ -2,8 +2,11 @@ import 'dart:ui';
 
 import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:pagina_de_marcas/api/api.dart';
 import 'package:pagina_de_marcas/colors.dart';
+import 'package:pagina_de_marcas/controller/product_controller.dart';
 import 'package:pagina_de_marcas/model/product/product_response.dart';
 import 'package:pagina_de_marcas/model/product/sku_response.dart';
 import 'package:pagina_de_marcas/model/search/search_product_response.dart';
@@ -31,9 +34,12 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
 
     Future<SearchProductResponse> searchResponse;
 
+    final productAmountController = ProductController();
+
     @override
     void initState() {
       searchResponse = _postProductSearch(widget.query);
+      searchResponse.then((response) => productAmountController.setProductAmount((response.Total > 0) ? response.Total : response.Products.length));
       super.initState();
     }
 
@@ -82,11 +88,15 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
                     Spacer(),
                     Column(
                       children: <Widget>[
-                        Text(
-                          resultsAmount.toString() ?? "",
-                          style: TextStyle(
-                            color: Colors.grey
-                          ),
+                        Observer(
+                          builder: (_) {
+                            return Text(
+                              '${productAmountController.productAmount}',
+                              style: TextStyle(
+                                  color: Colors.grey
+                              ),
+                            );
+                          }
                         ),
                         Text(
                           "resultados",
@@ -127,7 +137,6 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
                             print(snapshot.error);
                           }
                           else {
-                            resultsAmount = snapshot.data.Total;
                             return Container(
                                 height: 550,
                                 margin: EdgeInsets.only(top: 16),
