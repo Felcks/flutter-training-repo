@@ -10,6 +10,7 @@ class SellerResponse{
 
   double Price;
   double ListPrice;
+  int Quantity;
 
   SellerResponse();
 

@@ -15,6 +15,13 @@ class SkuResponse{
   List<ImageResponse> Images;
   List<SellerResponse> Sellers;
 
+  SellerResponse getFirstSellerWithQuantity(){
+    for(var seller in Sellers){
+      if(seller.Quantity > 0)
+        return seller;
+    }
+  }
+
   factory SkuResponse.fromJson(Map<String, dynamic> json) =>
       _$SkuResponseFromJson(json);
 

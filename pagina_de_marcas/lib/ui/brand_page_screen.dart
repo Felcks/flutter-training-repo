@@ -43,6 +43,93 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
       super.initState();
     }
 
+    Widget getPriceOrUnavaibleWidget(SkuResponse sku){
+
+      var seller = sku.getFirstSellerWithQuantity();
+
+      if(seller != null){
+        return Column(
+          children: <Widget>[
+            SizedBox(
+              height: 30,
+              child: (seller.ListPrice != seller.Price)? Padding(
+              padding: EdgeInsets.only(top: 16),
+              child: Text(
+                "R\$ ${seller.ListPrice.toString()}",
+                maxLines: 3,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12
+                ),
+              ),
+              ): Container(),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 4),
+              child: Text(
+                "R\$ ${seller.Price.toString()}",
+                maxLines: 5,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: MyColors.pink,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+            )
+          ],
+        );
+      }
+      else{
+        return Container();
+      }
+    }
+
+    Widget getBuyButtonOrUnavaible(SkuResponse sku) {
+      var seller = sku.getFirstSellerWithQuantity();
+
+      if (seller != null) {
+        return RaisedButton(
+            onPressed: () {},
+            child: Text(
+              "COMPRAR",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16
+              ),
+            ),
+            highlightColor: Colors.white54,
+            splashColor: Colors.white54,
+            color: MyColors.pink,
+            padding: EdgeInsets.all(8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(32),
+            )
+        );
+      }
+      else {
+        return RaisedButton(
+            onPressed: () {},
+            child: Text(
+              "INDISPONÍVEL",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16
+              ),
+            ),
+            highlightColor: Colors.white54,
+            splashColor: Colors.white54,
+            color: Colors.grey,
+            padding: EdgeInsets.all(8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(32),
+            )
+        );
+      }
+    }
+
+
     @override
     Widget build(BuildContext context) {
       return Scaffold(
@@ -137,6 +224,8 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
                             print(snapshot.error);
                           }
                           else {
+
+
                             return Container(
                                 height: 550,
                                 margin: EdgeInsets.only(top: 16),
@@ -197,12 +286,15 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
                                                           ),
                                                           Padding(
                                                             padding: EdgeInsets.all(16),
-                                                            child: Text(
-                                                              product.Name,
-                                                              maxLines: 3,
-                                                              textAlign: TextAlign.center,
-                                                              style: TextStyle(
-                                                                color: Colors.black,
+                                                            child: SizedBox(
+                                                              height: 50,
+                                                              child: Text(
+                                                                product.Name,
+                                                                maxLines: 3,
+                                                                textAlign: TextAlign.center,
+                                                                style: TextStyle(
+                                                                  color: Colors.black,
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
@@ -244,31 +336,7 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
                                                                 ],
                                                               )
                                                           ),
-                                                          Padding(
-                                                            padding: EdgeInsets.only(top: 16),
-                                                            child: Text(
-                                                              "R\$ ${sku.Sellers[0].ListPrice.toString()}",
-                                                              maxLines: 3,
-                                                              textAlign: TextAlign.center,
-                                                              style: TextStyle(
-                                                                  color: Colors.grey,
-                                                                  fontSize: 12
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: EdgeInsets.only(top: 4),
-                                                            child: Text(
-                                                              "R\$ ${sku.Sellers[0].Price.toString()}",
-                                                              maxLines: 5,
-                                                              textAlign: TextAlign.center,
-                                                              style: TextStyle(
-                                                                  color: MyColors.pink,
-                                                                  fontSize: 20,
-                                                                  fontWeight: FontWeight.bold
-                                                              ),
-                                                            ),
-                                                          )
+                                                          getPriceOrUnavaibleWidget(sku),
                                                         ],
                                                       )
                                                   ),
@@ -277,24 +345,7 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
                                                       child: Container(
                                                         padding: EdgeInsets.symmetric(horizontal: 8),
                                                         width: 200,
-                                                        child: RaisedButton(
-                                                            onPressed: () {
-                                                            },
-                                                            child: Text(
-                                                              "COMPRAR",
-                                                              style: TextStyle(
-                                                                  color: Colors.white,
-                                                                  fontSize: 16
-                                                              ),
-                                                            ),
-                                                            highlightColor: Colors.white54,
-                                                            splashColor: Colors.white54,
-                                                            color: MyColors.pink,
-                                                            padding: EdgeInsets.all(8),
-                                                            shape: RoundedRectangleBorder(
-                                                              borderRadius: BorderRadius.circular(32),
-                                                            )
-                                                        ),
+                                                        child: getBuyButtonOrUnavaible(sku)
                                                       )
                                                   )
                                                 ],
