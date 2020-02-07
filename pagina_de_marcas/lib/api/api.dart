@@ -9,7 +9,8 @@ import 'package:pagina_de_marcas/model/search/search_product_response.dart';
 
 import 'package:pagina_de_marcas/model/search/search_product_request.dart';
 
-const URL_BASE = "api-homolog-epocacosmeticosv2.mobfiq.com.br";
+//const URL_BASE = "api-homolog-epocacosmeticosv2.mobfiq.com.br";
+const URL_BASE = "api-homolog-offpremiumv2.mobfiq.com.br";
 
 class Api{
 

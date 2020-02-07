@@ -130,6 +130,50 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
     }
 
 
+    Widget getRating(ProductResponse product){
+
+      if(product.RatingResume != null){
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            StarDisplayWidget(
+              value: product.RatingResume.Average,
+              filledStar: Icon(
+                Icons.star,
+                color: Colors.yellow[700],
+                size: 17,
+              ),
+              unfilledStar: Icon(
+                Icons.star,
+                color: Colors.grey[300],
+                size: 17,
+              ),
+              halfStar: Icon(
+                Icons.star_half,
+                color: Colors.yellow[700],
+                size: 17,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 8),
+              child: Text(
+                "(${product.RatingResume.Count})",
+                maxLines: 3,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14
+                ),
+              ),
+            ),
+          ],
+        );
+      }
+      else{
+        return Container();
+      }
+    }
+
     @override
     Widget build(BuildContext context) {
       return Scaffold(
@@ -228,11 +272,10 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
 
                             return Container(
                                 height: 550,
-                                margin: EdgeInsets.only(top: 16),
                                 child: Scrollbar(
                                   child: ListView.separated(
                                     shrinkWrap: true,
-                                      padding: EdgeInsets.symmetric(vertical: 8),
+                                      padding: EdgeInsets.only(bottom: 8),
                                       scrollDirection: Axis.horizontal,
                                       itemCount: snapshot.data.Products.length,
                                       separatorBuilder: (context, index) {
@@ -254,8 +297,8 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
                                           },
                                           child: Container(
                                               margin: EdgeInsets.all(3),
-                                              padding: EdgeInsets.symmetric(vertical: 16),
-                                              width: 170,
+                                              padding: EdgeInsets.only(bottom: 16),
+                                              width: 250,
                                               decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(0),
                                                   color: Colors.white,
@@ -273,8 +316,8 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
                                                       child: Column(
                                                         children: <Widget>[
                                                           Container(
-                                                            height: 200,
-                                                            width: 500,
+                                                            height: 400,
+                                                            width: 600,
                                                             decoration: BoxDecoration(
                                                                 image: DecorationImage(
                                                                     fit: BoxFit.contain,
@@ -300,41 +343,7 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
                                                           ),
                                                           Padding(
                                                               padding: EdgeInsets.only(top: 0),
-                                                              child: Row(
-                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                children: <Widget>[
-                                                                  StarDisplayWidget(
-                                                                    value: product.RatingResume.Average,
-                                                                    filledStar: Icon(
-                                                                      Icons.star,
-                                                                      color: Colors.yellow[700],
-                                                                      size: 17,
-                                                                    ),
-                                                                    unfilledStar: Icon(
-                                                                      Icons.star,
-                                                                      color: Colors.grey[300],
-                                                                      size: 17,
-                                                                    ),
-                                                                    halfStar: Icon(
-                                                                      Icons.star_half,
-                                                                      color: Colors.yellow[700],
-                                                                      size: 17,
-                                                                    ),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsets.only(left: 8),
-                                                                    child: Text(
-                                                                      "(${product.RatingResume.Count})",
-                                                                      maxLines: 3,
-                                                                      textAlign: TextAlign.center,
-                                                                      style: TextStyle(
-                                                                          color: Colors.grey,
-                                                                          fontSize: 14
-                                                                      ),
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              )
+                                                              child: getRating(product)
                                                           ),
                                                           getPriceOrUnavaibleWidget(sku),
                                                         ],

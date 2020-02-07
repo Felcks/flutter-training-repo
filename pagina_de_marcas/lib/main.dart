@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pagina_de_marcas/ui/brand_page_screen.dart';
 import 'package:pagina_de_marcas/ui/brand_spotlight_screen.dart';
+import 'package:pagina_de_marcas/ui/product_screen.dart';
 
 import 'colors.dart';
 
@@ -31,7 +33,7 @@ void main() => runApp(
       // Define the default TextTheme. Use this to specify the default
       // text styling for headlines, titles, bodies of text, and more.
     ),
-    home: BrandSpotlightScreen(),
+    home: BrandPageScreen(""),
   )
 );
 
