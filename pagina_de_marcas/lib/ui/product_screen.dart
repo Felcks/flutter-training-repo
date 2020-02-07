@@ -14,15 +14,51 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
 
+  bool activated = false;
+
+  ScrollController _scrollController;
+
+  _scrollListener() {
+    if (_scrollController.offset >= 400) {
+      setState(() {
+        activated = true;
+      });
+    }
+    if (_scrollController.offset < 400) {
+      setState(() {
+        activated = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListener);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(widget.product.Name),
-        backgroundColor: Colors.transparent,
+        title: Text( (activated) ? widget.product.Name : ""),
+        titleSpacing: 0,
+        backgroundColor: (activated) ? Colors.white : Colors.transparent,
         elevation: 0.0,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {},
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -61,14 +97,28 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
               ],
             ),
-
             Container(
+              padding: EdgeInsets.all(16),
               color: Colors.white,
               height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    widget.product.Name,
+                    style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.black
+                    ),
+                  ),
+                ],
+              )
             )
-
           ],
         ),
+        controller: _scrollController,
       ),
       bottomNavigationBar: Container(
         height: kBottomNavigationBarHeight * 2,
