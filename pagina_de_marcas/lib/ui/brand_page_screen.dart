@@ -129,6 +129,50 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
       }
     }
 
+    Widget getRating(ProductResponse product){
+
+      if(product.RatingResume != null){
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            StarDisplayWidget(
+              value: product.RatingResume.Average,
+              filledStar: Icon(
+                Icons.star,
+                color: Colors.yellow[700],
+                size: 17,
+              ),
+              unfilledStar: Icon(
+                Icons.star,
+                color: Colors.grey[300],
+                size: 17,
+              ),
+              halfStar: Icon(
+                Icons.star_half,
+                color: Colors.yellow[700],
+                size: 17,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 8),
+              child: Text(
+                "(${product.RatingResume.Count})",
+                maxLines: 3,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14
+                ),
+              ),
+            ),
+          ],
+        );
+      }
+      else{
+        return Container();
+      }
+    }
+
 
     @override
     Widget build(BuildContext context) {
@@ -300,41 +344,7 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
                                                           ),
                                                           Padding(
                                                               padding: EdgeInsets.only(top: 0),
-                                                              child: Row(
-                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                children: <Widget>[
-                                                                  StarDisplayWidget(
-                                                                    value: product.RatingResume.Average,
-                                                                    filledStar: Icon(
-                                                                      Icons.star,
-                                                                      color: Colors.yellow[700],
-                                                                      size: 17,
-                                                                    ),
-                                                                    unfilledStar: Icon(
-                                                                      Icons.star,
-                                                                      color: Colors.grey[300],
-                                                                      size: 17,
-                                                                    ),
-                                                                    halfStar: Icon(
-                                                                      Icons.star_half,
-                                                                      color: Colors.yellow[700],
-                                                                      size: 17,
-                                                                    ),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsets.only(left: 8),
-                                                                    child: Text(
-                                                                      "(${product.RatingResume.Count})",
-                                                                      maxLines: 3,
-                                                                      textAlign: TextAlign.center,
-                                                                      style: TextStyle(
-                                                                          color: Colors.grey,
-                                                                          fontSize: 14
-                                                                      ),
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              )
+                                                              child: getRating(product)
                                                           ),
                                                           getPriceOrUnavaibleWidget(sku),
                                                         ],
