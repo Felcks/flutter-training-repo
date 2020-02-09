@@ -1,51 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/config/app_config.dart';
+import 'package:pagina_de_marcas/config/color_config.dart';
 
 import '../main.dart';
 
 void main() {
+
+  ColorConfig colorConfig = ColorConfig(
+    primaryColor: Color(0xffC21581),
+    darkPrimaryColor:  Color(0xffa21581),
+    lightPrimaryColor:  Color(0xffffffff),
+    accentColor: Color(0xffC21581),
+    primaryText:  Color(0xffC21581),
+    secondaryText:  Color(0xffC21581),
+  );
+
   var configuredApp = new AppConfig(
-    appName: 'Época Cosmeticos',
-    flavorName: 'EpocaCosmeticos',
-    apiBaseUrl: 'https://api.example.com/',
+      appName: 'Época Cosmeticos',
+      flavorName: 'EpocaCosmeticos',
+      apiBaseUrl: 'https://api.example.com/',
       themeData: ThemeData(
         brightness: Brightness.light,
-        primaryColor: Color(0xffC21581),
-        accentColor: Color(0xffC21581),
-        backgroundColor: Colors.white,
+        primaryColor: colorConfig.primaryColor,
+        primaryColorLight: colorConfig.lightPrimaryColor,
+        primaryColorDark: colorConfig.darkPrimaryColor,
+        accentColor: colorConfig.accentColor,
+        backgroundColor: colorConfig.lightPrimaryColor,
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-          foregroundColor: Colors.white,
-          backgroundColor: Color(0xffC21581),
+          foregroundColor: colorConfig.lightPrimaryColor,
+          backgroundColor: colorConfig.accentColor
         ),
         appBarTheme: AppBarTheme(
           elevation: 0,
-          color: Colors.white,
+          color: colorConfig.lightPrimaryColor,
           textTheme: TextTheme(
             title: TextStyle(
-                color: Color(0xffC21581),
+                color: colorConfig.accentColor,
                 fontSize: 20
             ),
             body1: TextStyle(
-                color: Color(0xffC21581)
+              color: colorConfig.accentColor,
             ),
             button: TextStyle(
-                color: Color(0xffC21581)
+              color: colorConfig.accentColor,
             ),
           ),
           iconTheme: IconThemeData(
-              color: Color(0xffC21581)
+            color: colorConfig.accentColor,
           ),
         ),
         buttonTheme: ButtonThemeData(
-            buttonColor: Color(0xffC21581),
+            buttonColor: colorConfig.accentColor,
             textTheme: ButtonTextTheme.primary,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(32),
-                side: BorderSide(color: Color(0xffC21581))
+                side: BorderSide(
+                  color: colorConfig.accentColor,
+                )
             )
         ),
         iconTheme: IconThemeData(
-            color: Color(0xffC21581)
+          color: colorConfig.accentColor,
         ),
       ),
       child: MyApp()

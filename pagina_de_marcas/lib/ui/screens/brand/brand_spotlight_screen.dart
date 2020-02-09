@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/api/api.dart';
 import 'package:pagina_de_marcas/model/brand/brand_response.dart';
 import 'package:pagina_de_marcas/ui/screens/brand/brand_list_screen.dart';
-
-import '../../../colors.dart';
 import 'package:pagina_de_marcas/ui/screens/search/search_result_screen.dart';
+import 'package:pagina_de_marcas/ui/widgets/buttons.dart';
 
 class BrandSpotlightScreen extends StatefulWidget {
   @override
@@ -48,7 +47,6 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                   return Center(
                       child: SizedBox(
                         child: CircularProgressIndicator(
-                          backgroundColor: Theme.of(context).primaryColor,
                           strokeWidth: 5,
                         ),
                         width: 40,
@@ -139,7 +137,7 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                               }
                           ),
                         ),
-                        RaisedButton(
+                        Buttons.nonFilled(
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -153,6 +151,7 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                               ),
                             ),
                             padding: EdgeInsets.all(16),
+                          context: context
                         )
                       ],
                     );

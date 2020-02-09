@@ -433,7 +433,6 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                               child: Center(
                                 child: SizedBox(
                                   child: CircularProgressIndicator(
-                                    backgroundColor: Theme.of(context).primaryColor,
                                     strokeWidth: 5,
                                   ),
                                   width: 40,

@@ -58,7 +58,6 @@ class _BrandListScreenState extends State<BrandListScreen> {
               return Center(
                   child: SizedBox(
                     child: CircularProgressIndicator(
-                      backgroundColor: Theme.of(context).backgroundColor,
                       strokeWidth: 5,
                     ),
                     width: 40,
