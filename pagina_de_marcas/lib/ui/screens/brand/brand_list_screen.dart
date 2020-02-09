@@ -1,5 +1,6 @@
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pagina_de_marcas/colors.dart';
 import 'package:pagina_de_marcas/model/brand/brand_response.dart';
 import 'package:pagina_de_marcas/ui/screens/search/search_result_screen.dart';

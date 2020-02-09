@@ -14,6 +14,7 @@ import 'package:pagina_de_marcas/ui/screens/product/product_screen.dart';
 import 'package:pagina_de_marcas/ui/widgets/star_display.dart';
 
 class SearchResultScreen extends StatefulWidget {
+
   @override
   _SearchResultScreenState createState() => _SearchResultScreenState();
 
@@ -29,6 +30,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     int resultsAmount;
 
     Future<SearchProductResponse> _postProductSearch(String query) {
+
       return api.postProductSearch(query, 0, 10);
     }
 
