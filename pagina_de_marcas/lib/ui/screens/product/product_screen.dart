@@ -142,7 +142,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     widget.product.Skus[0].Sellers[0].Price.toString(),
                     style: TextStyle(
                         fontSize: 18,
-                        color: MyColors.pink
+                        color: Theme.of(context).accentColor,
                     ),
                   ),
                 ],
@@ -150,7 +150,7 @@ class _ProductScreenState extends State<ProductScreen> {
             ),
             Container(
               height: kBottomNavigationBarHeight,
-              color: MyColors.pink,
+              color: Theme.of(context).primaryColor,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,

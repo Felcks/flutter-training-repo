@@ -58,7 +58,7 @@ class _BrandListScreenState extends State<BrandListScreen> {
               return Center(
                   child: SizedBox(
                     child: CircularProgressIndicator(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Theme.of(context).backgroundColor,
                       strokeWidth: 5,
                     ),
                     width: 40,
@@ -90,8 +90,10 @@ class _BrandListScreenState extends State<BrandListScreen> {
                             alignment: Alignment.centerLeft,
                             child: IconButton(
                               onPressed: (){},
-                              icon: Icon(Icons.search),
-                              color: MyColors.pink,
+                              icon: Icon(
+                                Icons.search,
+                                color: Theme.of(context).accentColor,
+                              ),
                             ),
                           ),
                           TextField(
@@ -114,8 +116,10 @@ class _BrandListScreenState extends State<BrandListScreen> {
                             alignment: Alignment.centerRight,
                             child: IconButton(
                               onPressed: (){},
-                              icon: Icon(Icons.clear),
-                              color: Colors.grey,
+                              icon: Icon(
+                                  Icons.clear,
+                                  color: Colors.grey
+                              )
                             ),
                           ),
                         ],
@@ -143,8 +147,10 @@ class _BrandListScreenState extends State<BrandListScreen> {
                           alignment: Alignment.centerLeft,
                           child: IconButton(
                               onPressed: (){},
-                              icon: Icon(Icons.search),
-                              color: MyColors.pink,
+                              icon: Icon(
+                                Icons.search,
+                                color: Theme.of(context).accentColor,
+                              ),
                           ),
                         ),
                         TextField(

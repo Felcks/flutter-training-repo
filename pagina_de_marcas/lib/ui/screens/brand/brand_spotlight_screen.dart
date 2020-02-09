@@ -48,7 +48,7 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                   return Center(
                       child: SizedBox(
                         child: CircularProgressIndicator(
-                          backgroundColor: Colors.blue,
+                          backgroundColor: Theme.of(context).primaryColor,
                           strokeWidth: 5,
                         ),
                         width: 40,
@@ -149,18 +149,10 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                             child: Text(
                               "VER TODAS AS MARCAS",
                               style: TextStyle(
-                                color: MyColors.pink,
                                 fontSize: 16
                               ),
                             ),
-                            highlightColor: MyColors.pink_2,
-                            splashColor: MyColors.pink_2,
-                            color: Colors.white,
                             padding: EdgeInsets.all(16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(32),
-                              side: BorderSide(color: MyColors.pink)
-                            )
                         )
                       ],
                     );

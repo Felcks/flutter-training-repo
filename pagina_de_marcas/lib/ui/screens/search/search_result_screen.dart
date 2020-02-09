@@ -74,7 +74,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                 maxLines: 5,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: MyColors.pink,
+                    color: Theme.of(context).accentColor,
                     fontSize: 20,
                     fontWeight: FontWeight.bold
                 ),
@@ -101,13 +101,6 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                   fontSize: 16
               ),
             ),
-            highlightColor: Colors.white54,
-            splashColor: Colors.white54,
-            color: MyColors.pink,
-            padding: EdgeInsets.all(8),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(32),
-            )
         );
       }
       else {
@@ -124,9 +117,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
             splashColor: Colors.white54,
             color: Colors.grey,
             padding: EdgeInsets.all(8),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(32),
-            )
+
         );
       }
     }
@@ -397,7 +388,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         Text(
                           widget.query,
                           style: TextStyle(
-                              color: MyColors.pink,
+                              color: Theme.of(context).accentColor,
                               fontSize: 16,
                               fontWeight: FontWeight.bold
                           ),
@@ -442,7 +433,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                               child: Center(
                                 child: SizedBox(
                                   child: CircularProgressIndicator(
-                                    backgroundColor: Colors.blue,
+                                    backgroundColor: Theme.of(context).primaryColor,
                                     strokeWidth: 5,
                                   ),
                                   width: 40,
@@ -477,7 +468,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
             // Add your onPressed code here!
           },
           child: Icon(Icons.filter_list),
-          backgroundColor: MyColors.pink,
+          backgroundColor: Theme.of(context).primaryColor,
         ),
       );
     }
