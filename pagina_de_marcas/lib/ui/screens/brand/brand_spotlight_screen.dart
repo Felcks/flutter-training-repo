@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/api/api.dart';
 import 'package:pagina_de_marcas/model/brand/brand_response.dart';
-import 'package:pagina_de_marcas/ui/brand_list_screen.dart';
+import 'package:pagina_de_marcas/ui/screens/brand/brand_list_screen.dart';
 
-import '../colors.dart';
-import 'brand_page_screen.dart';
+import '../../../colors.dart';
+import 'package:pagina_de_marcas/ui/screens/search/search_result_screen.dart';
 
 class BrandSpotlightScreen extends StatefulWidget {
   @override
@@ -95,7 +95,7 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                                       onTap: (){
                                         Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context) => BrandPageScreen(brand.Name))
+                                            MaterialPageRoute(builder: (context) => SearchResultScreen(brand.Name))
                                         );
                                       },
                                       child: Container(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pagina_de_marcas/ui/brand_spotlight_screen.dart';
+import 'package:pagina_de_marcas/ui/screens/brand/brand_spotlight_screen.dart';
 
 import 'colors.dart';
 

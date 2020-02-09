@@ -10,19 +10,19 @@ import 'package:pagina_de_marcas/controller/product_controller.dart';
 import 'package:pagina_de_marcas/model/product/product_response.dart';
 import 'package:pagina_de_marcas/model/product/sku_response.dart';
 import 'package:pagina_de_marcas/model/search/search_product_response.dart';
-import 'package:pagina_de_marcas/ui/product_screen.dart';
-import 'package:pagina_de_marcas/ui/star_display.dart';
+import 'package:pagina_de_marcas/ui/screens/product/product_screen.dart';
+import 'package:pagina_de_marcas/ui/widgets/star_display.dart';
 
-class BrandPageScreen extends StatefulWidget {
+class SearchResultScreen extends StatefulWidget {
   @override
-  _BrandPageScreenState createState() => _BrandPageScreenState();
+  _SearchResultScreenState createState() => _SearchResultScreenState();
 
   String query;
 
-  BrandPageScreen(this.query);
+  SearchResultScreen(this.query);
 }
 
-class _BrandPageScreenState extends State<BrandPageScreen> {
+class _SearchResultScreenState extends State<SearchResultScreen> {
 
     Api api = Api();
 

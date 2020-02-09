@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/model/product/product_response.dart';
 
-import '../colors.dart';
+import '../../../colors.dart';
 
 class ProductScreen extends StatefulWidget {
   @override

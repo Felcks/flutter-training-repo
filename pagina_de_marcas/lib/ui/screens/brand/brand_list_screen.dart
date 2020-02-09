@@ -2,10 +2,10 @@ import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/colors.dart';
 import 'package:pagina_de_marcas/model/brand/brand_response.dart';
-import 'package:pagina_de_marcas/ui/brand_page_screen.dart';
+import 'package:pagina_de_marcas/ui/screens/search/search_result_screen.dart';
 import 'package:side_header_list_view/side_header_list_view.dart';
 
-import '../api/api.dart';
+import '../../../api/api.dart';
 import 'dart:async';
 
 class BrandListScreen extends StatefulWidget {
@@ -198,7 +198,7 @@ class _BrandListScreenState extends State<BrandListScreen> {
                               onTap: (){
                                 Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => BrandPageScreen(brand.Name))
+                                    MaterialPageRoute(builder: (context) => SearchResultScreen(brand.Name))
                                 );
                               },
                               child: Container(
