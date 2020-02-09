@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="MOBFIQ_APP_NAME" translatable="false">Época Cosméticos</string>
+    <string name="MOBFIQ_STORE_DEEPLINK" translatable="false">epocacosmeticos</string>
+    <string name="MOBFIQ_ONESIGNAL_KEY" translatable="false"></string>
+    <string name="google_app_id" translatable="false">1:580020019815:android:1e9d987b668a35f5</string>
+</resources>

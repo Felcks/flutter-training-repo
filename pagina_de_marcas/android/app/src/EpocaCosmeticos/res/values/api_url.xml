@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="MOBFIQ_API" translatable="false">http://api-homolog-epocacosmeticosv2.mobfiq.com.br</string>
+</resources>

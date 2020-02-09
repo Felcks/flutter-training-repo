@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="MOBFIQ_APP_NAME" translatable="false">Off Premium</string>
+    <string name="MOBFIQ_STORE_DEEPLINK" translatable="false">offpremium</string>
+    <string name="MOBFIQ_ONESIGNAL_KEY" translatable="false">987c18f1-a639-4f8c-8a8e-2584067905fe</string>
+    <string name="google_app_id" translatable="false">1:401723256292:android:62cfdfb0b930ef68</string>
+
+    <bool name="MOBFIQ_USE_BLACK_COLOR_IN_NAVIGATION_MENU">true</bool>
+</resources>
