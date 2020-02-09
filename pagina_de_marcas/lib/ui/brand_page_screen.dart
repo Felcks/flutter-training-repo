@@ -172,6 +172,192 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
         return Container();
       }
     }
+    
+    Widget getListView(AsyncSnapshot<dynamic> snapshot){
+      return Container(
+          height: 500,
+          child: Scrollbar(
+              child: ListView.separated(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: snapshot.data.Products.length,
+                  separatorBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.all(6),
+                    );
+                  },
+                  itemBuilder: (context, index) {
+                    ProductResponse product = snapshot.data.Products[index];
+
+                    SkuResponse sku = product.Skus[0];
+
+                    return InkWell(
+                      onTap: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(product))
+                        );
+                      },
+                      child: Container(
+                          margin: EdgeInsets.all(3),
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          width: 200,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(0),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey[300],
+                                    blurRadius: 3.0
+                                )
+                              ]
+                          ),
+                          child: Stack(
+                            children: <Widget>[
+                              Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Column(
+                                    children: <Widget>[
+                                      Container(
+                                        height: 200,
+                                        width: 500,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                fit: BoxFit.contain,
+                                                image: NetworkImage(
+                                                    product.Skus[0].Images[0].ImageUrl
+                                                )
+                                            )
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.all(16),
+                                        child: SizedBox(
+                                          height: 50,
+                                          child: Text(
+                                            product.Name,
+                                            maxLines: 3,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                          padding: EdgeInsets.only(top: 0),
+                                          child: getRating(product)
+                                      ),
+                                      getPriceOrUnavaibleWidget(sku),
+                                    ],
+                                  )
+                              ),
+                              Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Container(
+                                      padding: EdgeInsets.symmetric(horizontal: 8),
+                                      width: 200,
+                                      child: getBuyButtonOrUnavaible(sku)
+                                  )
+                              )
+                            ],
+                          )
+                      ),
+                    );
+                  }
+              )
+          )
+      );
+    }
+
+    Widget getGridView(AsyncSnapshot<dynamic> snapshot){
+      return Expanded(
+        child:GridView.builder(
+            itemCount: snapshot.data.Products.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.4),
+
+            itemBuilder: (BuildContext context, int index) {
+              ProductResponse product = snapshot.data.Products[index];
+              SkuResponse sku = product.Skus[0];
+
+              return InkWell(
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProductScreen(product))
+                  );
+                },
+                child: Container(
+                    margin: EdgeInsets.all(3),
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    width: 200,
+                    height: 600,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey[300],
+                              blurRadius: 3.0
+                          )
+                        ]
+                    ),
+                    child: Stack(
+                      children: <Widget>[
+                        Align(
+                            alignment: Alignment.topCenter,
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  height: 200,
+                                  width: 500,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          fit: BoxFit.contain,
+                                          image: NetworkImage(
+                                              product.Skus[0].Images[0].ImageUrl
+                                          )
+                                      )
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(16),
+                                  child: SizedBox(
+                                    height: 50,
+                                    child: Text(
+                                      product.Name,
+                                      maxLines: 3,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.only(top: 0),
+                                    child: getRating(product)
+                                ),
+                                getPriceOrUnavaibleWidget(sku),
+                              ],
+                            )
+                        ),
+                        Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                width: 200,
+                                child: getBuyButtonOrUnavaible(sku)
+                            )
+                        )
+                      ],
+                    )
+                ),
+              );
+            })
+      );
+    }
 
 
     @override
@@ -239,6 +425,9 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
                     )
                   ],
                 ),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
                   child: FutureBuilder(
                     future: searchResponse,
@@ -268,104 +457,7 @@ class _BrandPageScreenState extends State<BrandPageScreen> {
                             print(snapshot.error);
                           }
                           else {
-
-
-                            return Container(
-                                height: 550,
-                                margin: EdgeInsets.only(top: 16),
-                                child: Scrollbar(
-                                  child: ListView.separated(
-                                    shrinkWrap: true,
-                                      padding: EdgeInsets.symmetric(vertical: 8),
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: snapshot.data.Products.length,
-                                      separatorBuilder: (context, index) {
-                                        return Padding(
-                                          padding: EdgeInsets.all(6),
-                                        );
-                                      },
-                                      itemBuilder: (context, index) {
-                                        ProductResponse product = snapshot.data.Products[index];
-
-                                        SkuResponse sku = product.Skus[0];
-
-                                        return InkWell(
-                                          onTap: (){
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(builder: (context) => ProductScreen(product))
-                                            );
-                                          },
-                                          child: Container(
-                                              margin: EdgeInsets.all(3),
-                                              padding: EdgeInsets.symmetric(vertical: 16),
-                                              width: 170,
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(0),
-                                                  color: Colors.white,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                        color: Colors.grey[300],
-                                                        blurRadius: 3.0
-                                                    )
-                                                  ]
-                                              ),
-                                              child: Stack(
-                                                children: <Widget>[
-                                                  Align(
-                                                      alignment: Alignment.topCenter,
-                                                      child: Column(
-                                                        children: <Widget>[
-                                                          Container(
-                                                            height: 200,
-                                                            width: 500,
-                                                            decoration: BoxDecoration(
-                                                                image: DecorationImage(
-                                                                    fit: BoxFit.contain,
-                                                                    image: NetworkImage(
-                                                                        product.Skus[0].Images[0].ImageUrl
-                                                                    )
-                                                                )
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: EdgeInsets.all(16),
-                                                            child: SizedBox(
-                                                              height: 50,
-                                                              child: Text(
-                                                                product.Name,
-                                                                maxLines: 3,
-                                                                textAlign: TextAlign.center,
-                                                                style: TextStyle(
-                                                                  color: Colors.black,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                              padding: EdgeInsets.only(top: 0),
-                                                              child: getRating(product)
-                                                          ),
-                                                          getPriceOrUnavaibleWidget(sku),
-                                                        ],
-                                                      )
-                                                  ),
-                                                  Align(
-                                                      alignment: Alignment.bottomCenter,
-                                                      child: Container(
-                                                        padding: EdgeInsets.symmetric(horizontal: 8),
-                                                        width: 200,
-                                                        child: getBuyButtonOrUnavaible(sku)
-                                                      )
-                                                  )
-                                                ],
-                                              )
-                                          ),
-                                        );
-                                      }
-                                  ),
-                                )
-                            );
+                            return getGridView(snapshot);
                           }
                           break;
                       }
