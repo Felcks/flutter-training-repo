@@ -137,7 +137,11 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                               }
                           ),
                         ),
-                        Buttons.nonFilled(
+                        Theme(
+                          data: Theme.of(context).copyWith(
+                            buttonTheme: Buttons.nonFilled(),
+                          ),
+                          child: RaisedButton(
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -147,11 +151,11 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                             child: Text(
                               "VER TODAS AS MARCAS",
                               style: TextStyle(
-                                fontSize: 16
+                                  fontSize: 16
                               ),
                             ),
                             padding: EdgeInsets.all(16),
-                          context: context
+                          ),
                         )
                       ],
                     );

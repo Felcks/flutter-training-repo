@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/config/app_config.dart';
+import 'package:pagina_de_marcas/config/color_config.dart';
 
 import '../main.dart';
 
 void main() {
+
+  ColorConfig.setBasicColors(
+    primaryColor: Color(0xff000000),
+    darkPrimaryColor:  Color(0xff000000),
+    lightPrimaryColor:  Color(0xffffffff),
+    accentColor: Color(0xffD32F2F),
+    primaryText:  Color(0xff000000),
+    secondaryText:  Color(0xff000000),
+  );
+
   var configuredApp = new AppConfig(
     appName: 'Off Premium',
     flavorName: 'OffPremium',

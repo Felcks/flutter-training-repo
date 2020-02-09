@@ -6,7 +6,7 @@ import '../main.dart';
 
 void main() {
 
-  ColorConfig colorConfig = ColorConfig(
+  ColorConfig.setBasicColors(
     primaryColor: Color(0xffC21581),
     darkPrimaryColor:  Color(0xffa21581),
     lightPrimaryColor:  Color(0xffffffff),
@@ -15,52 +15,57 @@ void main() {
     secondaryText:  Color(0xffC21581),
   );
 
+  NonFilledButtonColor.setColors(
+      highlightColor: Color(0x55C21581),
+      splashColor: Color(0x55C21581)
+  );
+
   var configuredApp = new AppConfig(
       appName: 'Época Cosmeticos',
       flavorName: 'EpocaCosmeticos',
       apiBaseUrl: 'https://api.example.com/',
       themeData: ThemeData(
         brightness: Brightness.light,
-        primaryColor: colorConfig.primaryColor,
-        primaryColorLight: colorConfig.lightPrimaryColor,
-        primaryColorDark: colorConfig.darkPrimaryColor,
-        accentColor: colorConfig.accentColor,
-        backgroundColor: colorConfig.lightPrimaryColor,
+        primaryColor: ColorConfig.primaryColor,
+        primaryColorLight: ColorConfig.lightPrimaryColor,
+        primaryColorDark: ColorConfig.darkPrimaryColor,
+        accentColor: ColorConfig.accentColor,
+        backgroundColor: ColorConfig.lightPrimaryColor,
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-          foregroundColor: colorConfig.lightPrimaryColor,
-          backgroundColor: colorConfig.accentColor
+          foregroundColor: ColorConfig.lightPrimaryColor,
+          backgroundColor: ColorConfig.accentColor
         ),
         appBarTheme: AppBarTheme(
           elevation: 0,
-          color: colorConfig.lightPrimaryColor,
+          color: ColorConfig.lightPrimaryColor,
           textTheme: TextTheme(
             title: TextStyle(
-                color: colorConfig.accentColor,
+                color: ColorConfig.accentColor,
                 fontSize: 20
             ),
             body1: TextStyle(
-              color: colorConfig.accentColor,
+              color: ColorConfig.accentColor,
             ),
             button: TextStyle(
-              color: colorConfig.accentColor,
+              color: ColorConfig.accentColor,
             ),
           ),
           iconTheme: IconThemeData(
-            color: colorConfig.accentColor,
+            color: ColorConfig.accentColor,
           ),
         ),
         buttonTheme: ButtonThemeData(
-            buttonColor: colorConfig.accentColor,
+            buttonColor: ColorConfig.accentColor,
             textTheme: ButtonTextTheme.primary,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(32),
                 side: BorderSide(
-                  color: colorConfig.accentColor,
+                  color: ColorConfig.accentColor,
                 )
             )
         ),
         iconTheme: IconThemeData(
-          color: colorConfig.accentColor,
+          color: ColorConfig.accentColor,
         ),
       ),
       child: MyApp()
