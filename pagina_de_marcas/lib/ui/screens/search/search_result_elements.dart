@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BrandSpotlightElements{
+class SearchResultElements{
 
   ButtonThemeData getButton01() {}
 }
