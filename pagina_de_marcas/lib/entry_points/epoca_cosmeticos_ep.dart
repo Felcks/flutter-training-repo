@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/config/app_config.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
+import 'package:pagina_de_marcas/store/epoca_cosmeticos/brand_spotlight_elements.dart';
+import 'package:pagina_de_marcas/store/off_premium/brand_spotlight_elements.dart';
 import 'package:pagina_de_marcas/ui/screens/screen_master.dart';
 
 import '../main.dart';
@@ -20,6 +22,8 @@ void main() {
       highlightColor: Color(0x35C21581),
       splashColor: Color(0x35C21581)
   );
+
+  ScreenMaster.brandSpotlightElements = EpocaBrandSpotlightElementsImpl();
 
   var configuredApp = new AppConfig(
       appName: 'Época Cosmeticos',

@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
 import 'package:pagina_de_marcas/ui/screens/brand/spotlight/brand_spotlight_elements.dart';
 
-class BrandSpotlightElementsImpl implements BrandSpotlightElements {
+class OffPremiumBrandSpotlightElementsImpl implements BrandSpotlightElements {
 
   ButtonThemeData getButton01(){
     return ButtonThemeData(

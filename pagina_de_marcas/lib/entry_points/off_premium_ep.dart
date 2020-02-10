@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/config/app_config.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
-import 'package:pagina_de_marcas/store/off_premium/screens/brand/spotlight/brand_spotlight_elements.dart';
+import 'package:pagina_de_marcas/store/off_premium/brand_spotlight_elements.dart';
 import 'package:pagina_de_marcas/ui/screens/brand/spotlight/brand_spotlight_elements.dart';
 import 'package:pagina_de_marcas/ui/screens/screen_master.dart';
 
@@ -18,7 +18,7 @@ void main() {
     secondaryText:  Color(0xff000000),
   );
 
-  ScreenMaster.brandSpotlightElements = BrandSpotlightElementsImpl();
+  ScreenMaster.brandSpotlightElements = OffPremiumBrandSpotlightElementsImpl();
 
   var configuredApp = new AppConfig(
     appName: 'Off Premium',

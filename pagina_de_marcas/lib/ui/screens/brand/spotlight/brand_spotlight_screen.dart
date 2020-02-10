@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/api/api.dart';
 import 'package:pagina_de_marcas/config/app_config.dart';
 import 'package:pagina_de_marcas/model/brand/brand_response.dart';
-import 'package:pagina_de_marcas/store/off_premium/screens/brand/spotlight/brand_spotlight_elements.dart';
+import 'package:pagina_de_marcas/store/off_premium/brand_spotlight_elements.dart';
 import 'package:pagina_de_marcas/ui/screens/brand/brand_list_screen.dart';
 import 'package:pagina_de_marcas/ui/screens/brand/spotlight/brand_spotlight_elements.dart';
 import 'package:pagina_de_marcas/ui/screens/search/search_result_screen.dart';
