@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/config/app_config.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
+import 'package:pagina_de_marcas/ui/screens/screen_master.dart';
 
 import '../main.dart';
 
@@ -16,8 +17,8 @@ void main() {
   );
 
   NonFilledButtonColor.setColors(
-      highlightColor: Color(0x55C21581),
-      splashColor: Color(0x55C21581)
+      highlightColor: Color(0x35C21581),
+      splashColor: Color(0x35C21581)
   );
 
   var configuredApp = new AppConfig(
