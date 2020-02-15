@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/config/app_config.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
+import 'package:pagina_de_marcas/config/flag_config.dart';
 import 'package:pagina_de_marcas/store/epoca_cosmeticos/brand_spotlight_elements.dart';
 import 'package:pagina_de_marcas/store/off_premium/brand_spotlight_elements.dart';
 import 'package:pagina_de_marcas/ui/screens/screen_master.dart';
@@ -23,12 +24,14 @@ void main() {
       splashColor: Color(0x35C21581)
   );
 
+  FlagConfig.cardFlag = CardFlag();
+
   ScreenMaster.brandSpotlightElements = EpocaBrandSpotlightElementsImpl();
 
   var configuredApp = new AppConfig(
       appName: 'Época Cosmeticos',
       flavorName: 'EpocaCosmeticos',
-      apiBaseUrl: 'https://api.example.com/',
+      apiBaseUrl: 'api-homolog-epocacosmeticosv2.mobfiq.com.br',
       themeData: ThemeData(
         brightness: Brightness.light,
         primaryColor: ColorConfig.primaryColor,

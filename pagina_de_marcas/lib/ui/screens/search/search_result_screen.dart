@@ -1,11 +1,8 @@
 import 'dart:ui';
 
-import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
 import 'package:pagina_de_marcas/api/api.dart';
-import 'package:pagina_de_marcas/colors.dart';
 import 'package:pagina_de_marcas/config/flag_config.dart';
 import 'package:pagina_de_marcas/controller/product_controller.dart';
 import 'package:pagina_de_marcas/model/product/product_response.dart';
@@ -13,7 +10,6 @@ import 'package:pagina_de_marcas/model/product/sku_response.dart';
 import 'package:pagina_de_marcas/model/search/search_product_response.dart';
 import 'package:pagina_de_marcas/ui/screens/product/product_screen.dart';
 import 'package:pagina_de_marcas/ui/widgets/product_card.dart';
-import 'package:pagina_de_marcas/ui/widgets/star_display.dart';
 
 class SearchResultScreen extends StatefulWidget {
 
@@ -27,7 +23,7 @@ class SearchResultScreen extends StatefulWidget {
 
 class _SearchResultScreenState extends State<SearchResultScreen> {
 
-    Api api = Api();
+    Api api;
 
     int resultsAmount;
 
@@ -42,9 +38,15 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
 
     @override
     void initState() {
+      super.initState();
+    }
+
+    @override
+    void didChangeDependencies(){
+      this.api = Api(context: this.context);
       searchResponse = _postProductSearch(widget.query);
       searchResponse.then((response) => productAmountController.setProductAmount((response.Total > 0) ? response.Total : response.Products.length));
-      super.initState();
+      super.didChangeDependencies();
     }
     
     Widget getListView(AsyncSnapshot<dynamic> snapshot){
@@ -131,53 +133,52 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         ),
         body: Container(
             color: Colors.white,
-            padding: EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Text(
-                            "Você está em:"
-                        ),
-                        Text(
-                          widget.query,
-                          style: TextStyle(
-                              color: Theme.of(context).accentColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold
+                Padding(
+                  padding: EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 4),
+                  child: Row(
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Text(
+                              "Você está em:"
                           ),
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    Column(
-                      children: <Widget>[
-                        Observer(
-                          builder: (_) {
-                            return Text(
-                              '${productAmountController.productAmount}',
-                              style: TextStyle(
-                                  color: Colors.grey
-                              ),
-                            );
-                          }
-                        ),
-                        Text(
-                          "resultados",
-                          style: TextStyle(
-                              color: Colors.grey
+                          Text(
+                            widget.query,
+                            style: TextStyle(
+                                color: Theme.of(context).accentColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold
+                            ),
                           ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
+                        ],
+                      ),
+                      Spacer(),
+                      Column(
+                        children: <Widget>[
+                          Observer(
+                              builder: (_) {
+                                return Text(
+                                  '${productAmountController.productAmount}',
+                                  style: TextStyle(
+                                      color: Colors.grey
+                                  ),
+                                );
+                              }
+                          ),
+                          Text(
+                            "resultados",
+                            style: TextStyle(
+                                color: Colors.grey
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
                 Container(
                   child: FutureBuilder(

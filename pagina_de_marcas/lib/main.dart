@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/ui/screens/brand/spotlight/brand_spotlight_screen.dart';
+import 'package:pagina_de_marcas/ui/screens/search/search_result_screen.dart';
 
 import 'colors.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return new  MaterialApp(
       title: config.appName,
       theme: config.themeData,
-      home: BrandSpotlightScreen(),
+      home: SearchResultScreen("Calça"),
     );
   }
 }

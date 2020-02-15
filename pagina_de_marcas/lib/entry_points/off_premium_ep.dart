@@ -19,15 +19,14 @@ void main() {
     secondaryText:  Color(0xff000000),
   );
 
-  FlagConfig.cardFlag = CardFlag(
-  );
+  FlagConfig.cardFlag = CardFlag();
 
   ScreenMaster.brandSpotlightElements = OffPremiumBrandSpotlightElementsImpl();
 
   var configuredApp = new AppConfig(
     appName: 'Off Premium',
     flavorName: 'OffPremium',
-    apiBaseUrl: 'https://api.example.com/',
+    apiBaseUrl: 'api-homolog-offpremiumv2.mobfiq.com.br',
     themeData: ThemeData(
       brightness: Brightness.light,
       primaryColor: Color(0xff000000),

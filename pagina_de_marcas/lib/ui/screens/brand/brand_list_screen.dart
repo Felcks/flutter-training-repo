@@ -17,7 +17,7 @@ class BrandListScreen extends StatefulWidget {
 
 class _BrandListScreenState extends State<BrandListScreen> {
 
-  Api api = Api();
+  Api api;
 
   Future<List<BrandResponse>> _getBrandList(){
     return api.getBrandList(false);
@@ -29,6 +29,7 @@ class _BrandListScreenState extends State<BrandListScreen> {
   @override
   void initState() {
     brandList = _getBrandList();
+    api = Api(context: this.context);
     super.initState();
   }
 

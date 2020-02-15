@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:money/money.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
@@ -6,48 +8,48 @@ import 'package:pagina_de_marcas/model/product/product_response.dart';
 import 'package:pagina_de_marcas/model/product/sku_response.dart';
 import 'package:pagina_de_marcas/ui/screens/screen_master.dart';
 import 'package:pagina_de_marcas/ui/widgets/star_display.dart';
+import 'package:progressive_image/progressive_image.dart';
 
 import 'buttons.dart';
 
-class ProductCard{
-
-  Widget getDefaultProductCard(ProductResponse product, BuildContext context){
-
+class ProductCard {
+  Widget getDefaultProductCard(ProductResponse product, BuildContext context) {
     SkuResponse sku = product.Skus[0];
 
     return Container(
-        margin: EdgeInsets.all(3),
-        padding: EdgeInsets.symmetric(vertical: 16),
+        margin: EdgeInsets.all(5),
+        padding: EdgeInsets.symmetric(vertical: 0),
         width: 200,
         height: 600,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(0),
             color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey[300],
-                  blurRadius: 3.0
-              )
-            ]
-        ),
+            boxShadow: [BoxShadow(color: Colors.grey[300], blurRadius: 3.0)]),
         child: Stack(
           children: <Widget>[
             Align(
                 alignment: Alignment.topCenter,
                 child: Column(
                   children: <Widget>[
-                    Container(
-                      height: 200,
+                    ProgressiveImage(
+                      placeholder: AssetImage('assets/a.png'),
+                      // size: 1.87KB
+                      thumbnail: NetworkImage(product.Skus[0].Images[0].ImageUrl),
+                      // size: 1.29MB
+                      image: NetworkImage(product.Skus[0].Images[0].ImageUrl),
+                      height: 300,
                       width: 500,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.contain,
-                              image: NetworkImage(
-                                  product.Skus[0].Images[0].ImageUrl
-                              )
-                          )
-                      ),
                     ),
+//                    Container(
+//                      height: 300,
+//                      width: 500,
+//                      decoration: BoxDecoration(
+//                          image: DecorationImage(
+//                              fit: BoxFit.contain,
+//                              image: NetworkImage(
+//                                  product.Skus[0].Images[0].ImageUrl,
+//                              ))),
+//                    ),
                     Padding(
                       padding: EdgeInsets.all(16),
                       child: SizedBox(
@@ -65,45 +67,42 @@ class ProductCard{
                     getRating(product),
                     getPrice(sku),
                   ],
-                )
-            ),
+                )),
             Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     width: 200,
-                    child: getBuyButtonOrUnavaible(sku, context)
-                )
-            )
+                    child: getBuyButtonOrUnavaible(sku, context)))
           ],
-        )
-    );
+        ));
   }
 
-  Widget getPrice(SkuResponse sku){
-
-    if(!FlagConfig.cardFlag.showPrice)
-      return Container();
+  Widget getPrice(SkuResponse sku) {
+    if (!FlagConfig.cardFlag.showPrice) return Container();
 
     var seller = sku.getFirstSellerWithQuantity();
 
-    if(seller != null){
+    if (seller != null) {
       return Column(
         children: <Widget>[
           SizedBox(
             height: 30,
-            child: (seller.ListPrice != seller.Price)? Padding(
-              padding: EdgeInsets.only(top: 16),
-              child: Text(
-                "R\$ ${Money.fromDouble(seller.ListPrice, Currency("BRL")).amountAsString}",
-                maxLines: 3,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12
-                ),
-              ),
-            ): Container(),
+            child: (seller.ListPrice != seller.Price)
+                ? Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: Text(
+                      "R\$ ${Money.fromDouble(seller.ListPrice, Currency("BRL")).amountAsString}",
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          decoration: TextDecoration.lineThrough,
+                          letterSpacing: 1.2,
+                          color: Colors.grey,
+                          fontSize: 12),
+                    ),
+                  )
+                : Container(),
           ),
           Padding(
             padding: EdgeInsets.only(top: 4),
@@ -114,19 +113,18 @@ class ProductCard{
               style: TextStyle(
                   color: ColorConfig.accentColor,
                   fontSize: 20,
-                  fontWeight: FontWeight.bold
-              ),
+                  letterSpacing: 1.2,
+                  fontWeight: FontWeight.bold),
             ),
           )
         ],
       );
-    }
-    else{
+    } else {
       return Container();
     }
   }
 
-  Widget getListPrice(){
+  Widget getListPrice() {
     return Container();
   }
 
@@ -138,40 +136,31 @@ class ProductCard{
         onPressed: () {},
         child: Text(
           "COMPRAR",
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 16
-          ),
+          style: TextStyle(color: Colors.white, fontSize: 16),
         ),
       );
-    }
-    else {
+    } else {
       return Theme(
-        data: Theme.of(context).copyWith(
-          buttonTheme: (ScreenMaster.searchResultElements.getButtonUnavailable()) ?? Buttons.unavailable(),
-        ),
-        child: RaisedButton(
-          onPressed: () {},
-          child: Text(
-            "INDISPONÍVEL",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 16
-            ),
+          data: Theme.of(context).copyWith(
+            buttonTheme:
+                (ScreenMaster.searchResultElements.getButtonUnavailable()) ??
+                    Buttons.unavailable(),
           ),
-          padding: EdgeInsets.all(8),
-
-        )
-      );
+          child: RaisedButton(
+            onPressed: () {},
+            child: Text(
+              "INDISPONÍVEL",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            padding: EdgeInsets.all(8),
+          ));
     }
   }
 
-  Widget getRating(ProductResponse product){
+  Widget getRating(ProductResponse product) {
+    if (!FlagConfig.cardFlag.showStars) return Container();
 
-    if(!FlagConfig.cardFlag.showStars)
-      return Container();
-
-    if(product.RatingResume != null){
+    if (product.RatingResume != null) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -199,18 +188,13 @@ class ProductCard{
               "(${product.RatingResume.Count})",
               maxLines: 3,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 14
-              ),
+              style: TextStyle(color: Colors.grey, fontSize: 14),
             ),
           ),
         ],
       );
-    }
-    else{
+    } else {
       return Container();
     }
   }
-
 }

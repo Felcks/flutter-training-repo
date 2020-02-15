@@ -18,7 +18,7 @@ class BrandSpotlightScreen extends StatefulWidget {
 
 class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
 
-  Api api = Api();
+  Api api;
 
 
   Future<List<BrandResponse>> _getBrandList(){
@@ -29,6 +29,7 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
 
   @override
   void initState() {
+    this.api =  Api(context: this.context);
     brandList = _getBrandList();
     super.initState();
   }
