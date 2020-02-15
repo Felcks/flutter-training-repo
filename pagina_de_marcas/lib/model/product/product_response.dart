@@ -12,6 +12,7 @@ class ProductResponse{
 
   List<SkuResponse> Skus;
   String Name;
+  String Brand;
   RatingResponse RatingResume;
 
   ProductResponse();

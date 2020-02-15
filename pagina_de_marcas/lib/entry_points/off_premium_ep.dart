@@ -20,7 +20,9 @@ void main() {
   );
 
   FlagConfig.cardFlag = CardFlag(
-    showStars: false
+    showStars: false,
+    showBuyButton: false,
+    showBrand: true,
   );
 
   ScreenMaster.brandSpotlightElements = OffPremiumBrandSpotlightElementsImpl();

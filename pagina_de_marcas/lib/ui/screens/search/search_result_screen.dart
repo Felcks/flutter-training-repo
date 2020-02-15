@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pagina_de_marcas/api/api.dart';
 import 'package:pagina_de_marcas/config/flag_config.dart';
@@ -12,7 +13,6 @@ import 'package:pagina_de_marcas/ui/screens/product/product_screen.dart';
 import 'package:pagina_de_marcas/ui/widgets/product_card.dart';
 
 class SearchResultScreen extends StatefulWidget {
-
   @override
   _SearchResultScreenState createState() => _SearchResultScreenState();
 
@@ -22,108 +22,138 @@ class SearchResultScreen extends StatefulWidget {
 }
 
 class _SearchResultScreenState extends State<SearchResultScreen> {
+  Api api;
+  int resultsAmount;
+  bool _isFloatButtonVisible = true;
+  ScrollController _floatActionButtonController;
 
-    Api api;
+  Future<SearchProductResponse> searchResponse;
+  final productAmountController = ProductController();
 
-    int resultsAmount;
+  Future<SearchProductResponse> _postProductSearch(String query) {
+    return api.postProductSearch(query, 0, 10);
+  }
 
-    Future<SearchProductResponse> _postProductSearch(String query) {
+  @override
+  void initState() {
+    super.initState();
+    _floatActionButtonController = new ScrollController();
+    _floatActionButtonController.addListener(() {
+      if (_floatActionButtonController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        if (_isFloatButtonVisible == true) {
+          /* only set when the previous state is false
+             * Less widget rebuilds
+             */
+          print(
+              "**** ${_isFloatButtonVisible} up"); //Move IO away from setState
+          setState(() {
+            _isFloatButtonVisible = false;
+          });
+        }
+      } else {
+        if (_floatActionButtonController.position.userScrollDirection ==
+            ScrollDirection.forward) {
+          if (_isFloatButtonVisible == false) {
+            /* only set when the previous state is false
+               * Less widget rebuilds
+               */
+            print(
+                "**** ${_isFloatButtonVisible} down"); //Move IO away from setState
+            setState(() {
+              _isFloatButtonVisible = true;
+            });
+          }
+        }
+      }
+    });
+  }
 
-      return api.postProductSearch(query, 0, 10);
-    }
+  @override
+  void didChangeDependencies() {
+    this.api = Api(context: this.context);
+    searchResponse = _postProductSearch(widget.query);
+    searchResponse.then((response) => productAmountController.setProductAmount(
+        (response.Total > 0) ? response.Total : response.Products.length));
+    super.didChangeDependencies();
+  }
 
-    Future<SearchProductResponse> searchResponse;
+  Widget getListView(AsyncSnapshot<dynamic> snapshot) {
+    return Container(
+        height: 400,
+        child: Scrollbar(
+            child: ListView.separated(
+                shrinkWrap: true,
+                padding: EdgeInsets.symmetric(vertical: 8),
+                scrollDirection: Axis.horizontal,
+                itemCount: snapshot.data.Products.length,
+                separatorBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.all(6),
+                  );
+                },
+                itemBuilder: (context, index) {
+                  ProductResponse product = snapshot.data.Products[index];
 
-    final productAmountController = ProductController();
-
-    @override
-    void initState() {
-      super.initState();
-    }
-
-    @override
-    void didChangeDependencies(){
-      this.api = Api(context: this.context);
-      searchResponse = _postProductSearch(widget.query);
-      searchResponse.then((response) => productAmountController.setProductAmount((response.Total > 0) ? response.Total : response.Products.length));
-      super.didChangeDependencies();
-    }
-    
-    Widget getListView(AsyncSnapshot<dynamic> snapshot){
-      return Container(
-          height: 400,
-          child: Scrollbar(
-              child: ListView.separated(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: snapshot.data.Products.length,
-                  separatorBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.all(6),
-                    );
-                  },
-                  itemBuilder: (context, index) {
-                    ProductResponse product = snapshot.data.Products[index];
-
-                    return InkWell(
-                      onTap: (){
+                  return InkWell(
+                      onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => ProductScreen(product))
-                        );
+                            MaterialPageRoute(
+                                builder: (context) => ProductScreen(product)));
                       },
-                      child: ProductCard().getDefaultProductCard(product, context)
-                    );
-                  }
-              )
-          )
-      );
-    }
+                      child: ProductCard()
+                          .getDefaultProductCard(product, context));
+                })));
+  }
 
-    Widget getGridView(AsyncSnapshot<dynamic> snapshot){
-      return Expanded(
-        child:GridView.builder(
+  Widget getGridView(AsyncSnapshot<dynamic> snapshot) {
+    return Expanded(
+        child: GridView.builder(
+            controller: _floatActionButtonController,
             itemCount: snapshot.data.Products.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: getCardAspectRatio()),
-
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, childAspectRatio: getCardAspectRatio()),
             itemBuilder: (BuildContext context, int index) {
               ProductResponse product = snapshot.data.Products[index];
               SkuResponse sku = product.Skus[0];
 
               return InkWell(
-                onTap: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ProductScreen(product))
-                  );
-                },
-                child: ProductCard().getDefaultProductCard(product, context)
-              );
-            })
-      );
-    }
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProductScreen(product)));
+                  },
+                  child: ProductCard().getDefaultProductCard(product, context));
+            }));
+  }
 
-    double getCardAspectRatio(){
-        double baseAspectRatio = 0.5;
-        double priceAspectRatio =  (FlagConfig.cardFlag.showPrice) ? 0.1 : 0;
-        double starsAspectRatio = (FlagConfig.cardFlag.showStars) ? 0.05 : 0;
+  double getCardAspectRatio() {
+    double baseAspectRatio = 0.55;
+    double brandAspectRatio = (FlagConfig.cardFlag.showBrand) ? 0.05 : 0;
+    double starsAspectRatio = (FlagConfig.cardFlag.showStars) ? 0.05 : 0;
+    double listPriceAspectRatio =  (FlagConfig.cardFlag.showListPrice) ? 0.02 : 0;
+    double priceAspectRatio = (FlagConfig.cardFlag.showPrice) ? 0.08 : 0;
+    double buyButtonAspectRatio = (FlagConfig.cardFlag.showBuyButton) ? 0.1 : 0;
 
-        return baseAspectRatio - priceAspectRatio - starsAspectRatio;
-    }
+    return baseAspectRatio -
+        brandAspectRatio -
+        starsAspectRatio -
+        listPriceAspectRatio -
+        priceAspectRatio -
+        buyButtonAspectRatio;
+  }
 
-
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
         appBar: AppBar(
           title: Text("Produtos"),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.search),
-              onPressed: () {
-
-              },
+              onPressed: () {},
             ),
             IconButton(
               icon: Icon(Icons.shopping_cart),
@@ -138,42 +168,34 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 4),
+                  padding:
+                      EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 4),
                   child: Row(
                     children: <Widget>[
                       Column(
                         children: <Widget>[
-                          Text(
-                              "Você está em:"
-                          ),
+                          Text("Você está em:"),
                           Text(
                             widget.query,
                             style: TextStyle(
                                 color: Theme.of(context).accentColor,
                                 fontSize: 16,
-                                fontWeight: FontWeight.bold
-                            ),
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
                       Spacer(),
                       Column(
                         children: <Widget>[
-                          Observer(
-                              builder: (_) {
-                                return Text(
-                                  '${productAmountController.productAmount}',
-                                  style: TextStyle(
-                                      color: Colors.grey
-                                  ),
-                                );
-                              }
-                          ),
+                          Observer(builder: (_) {
+                            return Text(
+                              '${productAmountController.productAmount}',
+                              style: TextStyle(color: Colors.grey),
+                            );
+                          }),
                           Text(
                             "resultados",
-                            style: TextStyle(
-                                color: Colors.grey
-                            ),
+                            style: TextStyle(color: Colors.grey),
                           )
                         ],
                       )
@@ -190,15 +212,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         case ConnectionState.waiting:
                           return Expanded(
                               child: Center(
-                                child: SizedBox(
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 5,
-                                  ),
-                                  width: 40,
-                                  height: 40,
-                                ) ,
-                              )
-                          );
+                            child: SizedBox(
+                              child: CircularProgressIndicator(
+                                strokeWidth: 5,
+                              ),
+                              width: 40,
+                              height: 40,
+                            ),
+                          ));
                           break;
                         case ConnectionState.active:
                           print("active");
@@ -206,8 +227,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         case ConnectionState.done:
                           if (snapshot.hasError) {
                             print(snapshot.error);
-                          }
-                          else {
+                          } else {
                             return getGridView(snapshot);
                           }
                           break;
@@ -217,17 +237,18 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                       );
                     },
                   ),
-                )
+                ),
               ],
-            )
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // Add your onPressed code here!
-          },
-          child: Icon(Icons.filter_list),
-          backgroundColor: Theme.of(context).primaryColor,
-        ),
-      );
-    }
+            )),
+        floatingActionButton: Visibility(
+          visible: _isFloatButtonVisible,
+          child: FloatingActionButton(
+            onPressed: () {
+              // Add your onPressed code here!
+            },
+            child: Icon(Icons.filter_list),
+            backgroundColor: Theme.of(context).primaryColor,
+          ),
+        ));
+  }
 }
