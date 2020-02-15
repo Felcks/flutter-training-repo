@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/config/app_config.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
+import 'package:pagina_de_marcas/config/flag_config.dart';
 import 'package:pagina_de_marcas/store/off_premium/brand_spotlight_elements.dart';
 import 'package:pagina_de_marcas/ui/screens/brand/spotlight/brand_spotlight_elements.dart';
 import 'package:pagina_de_marcas/ui/screens/screen_master.dart';
@@ -16,6 +17,9 @@ void main() {
     accentColor: Color(0xffD32F2F),
     primaryText:  Color(0xff000000),
     secondaryText:  Color(0xff000000),
+  );
+
+  FlagConfig.cardFlag = CardFlag(
   );
 
   ScreenMaster.brandSpotlightElements = OffPremiumBrandSpotlightElementsImpl();

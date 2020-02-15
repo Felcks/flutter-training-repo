@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:money/money.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
+import 'package:pagina_de_marcas/config/flag_config.dart';
 import 'package:pagina_de_marcas/model/product/product_response.dart';
 import 'package:pagina_de_marcas/model/product/sku_response.dart';
 import 'package:pagina_de_marcas/ui/screens/screen_master.dart';
@@ -60,10 +62,7 @@ class ProductCard{
                         ),
                       ),
                     ),
-                    Padding(
-                        padding: EdgeInsets.only(top: 0),
-                        child: getRating(product)
-                    ),
+                    getRating(product),
                     getPrice(sku),
                   ],
                 )
@@ -83,6 +82,9 @@ class ProductCard{
 
   Widget getPrice(SkuResponse sku){
 
+    if(!FlagConfig.cardFlag.showPrice)
+      return Container();
+
     var seller = sku.getFirstSellerWithQuantity();
 
     if(seller != null){
@@ -93,7 +95,7 @@ class ProductCard{
             child: (seller.ListPrice != seller.Price)? Padding(
               padding: EdgeInsets.only(top: 16),
               child: Text(
-                "R\$ ${seller.ListPrice.toString()}",
+                "R\$ ${Money.fromDouble(seller.ListPrice, Currency("BRL")).amountAsString}",
                 maxLines: 3,
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -106,7 +108,7 @@ class ProductCard{
           Padding(
             padding: EdgeInsets.only(top: 4),
             child: Text(
-              "R\$ ${seller.Price.toString()}",
+              "R\$ ${Money.fromDouble(seller.Price, Currency("BRL")).amountAsString}",
               maxLines: 5,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -122,6 +124,10 @@ class ProductCard{
     else{
       return Container();
     }
+  }
+
+  Widget getListPrice(){
+    return Container();
   }
 
   Widget getBuyButtonOrUnavaible(SkuResponse sku, BuildContext context) {
@@ -161,6 +167,9 @@ class ProductCard{
   }
 
   Widget getRating(ProductResponse product){
+
+    if(!FlagConfig.cardFlag.showStars)
+      return Container();
 
     if(product.RatingResume != null){
       return Row(

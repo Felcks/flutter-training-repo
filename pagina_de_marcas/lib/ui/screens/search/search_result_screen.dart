@@ -6,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pagina_de_marcas/api/api.dart';
 import 'package:pagina_de_marcas/colors.dart';
+import 'package:pagina_de_marcas/config/flag_config.dart';
 import 'package:pagina_de_marcas/controller/product_controller.dart';
 import 'package:pagina_de_marcas/model/product/product_response.dart';
 import 'package:pagina_de_marcas/model/product/sku_response.dart';
@@ -48,7 +49,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     
     Widget getListView(AsyncSnapshot<dynamic> snapshot){
       return Container(
-          height: 500,
+          height: 400,
           child: Scrollbar(
               child: ListView.separated(
                   shrinkWrap: true,
@@ -82,7 +83,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
       return Expanded(
         child:GridView.builder(
             itemCount: snapshot.data.Products.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.4),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: getCardAspectRatio()),
 
             itemBuilder: (BuildContext context, int index) {
               ProductResponse product = snapshot.data.Products[index];
@@ -99,6 +100,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               );
             })
       );
+    }
+
+    double getCardAspectRatio(){
+        double baseAspectRatio = 0.5;
+        double priceAspectRatio =  (FlagConfig.cardFlag.showPrice) ? 0.05 : 0;
+        double starsAspectRatio = (FlagConfig.cardFlag.showStars) ? 0.05 : 0;
+
+        return baseAspectRatio - priceAspectRatio - starsAspectRatio;
     }
 
 
