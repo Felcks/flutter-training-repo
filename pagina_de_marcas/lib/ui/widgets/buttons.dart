@@ -20,4 +20,16 @@ class Buttons{
     );
   }
 
+  static ButtonThemeData unavailable(){
+    return ButtonThemeData(
+        buttonColor: Colors.grey,
+        highlightColor: Colors.white54,
+        splashColor: Colors.white54,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(32),
+            side: BorderSide(color: Colors.grey)
+        )
+    );
+  }
+
 }

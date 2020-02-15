@@ -70,7 +70,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             MaterialPageRoute(builder: (context) => ProductScreen(product))
                         );
                       },
-                      child: ProductCard().getDefaultProductCard(product)
+                      child: ProductCard().getDefaultProductCard(product, context)
                     );
                   }
               )
@@ -95,7 +95,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                       MaterialPageRoute(builder: (context) => ProductScreen(product))
                   );
                 },
-                child: ProductCard().getDefaultProductCard(product)
+                child: ProductCard().getDefaultProductCard(product, context)
               );
             })
       );

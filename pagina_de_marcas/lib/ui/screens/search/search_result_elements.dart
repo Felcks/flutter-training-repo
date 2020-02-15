@@ -2,5 +2,5 @@ import 'package:flutter/material.dart';
 
 class SearchResultElements{
 
-  ButtonThemeData getButton01() {}
+  ButtonThemeData getButtonUnavailable() {}
 }

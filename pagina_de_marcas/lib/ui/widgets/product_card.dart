@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
 import 'package:pagina_de_marcas/model/product/product_response.dart';
 import 'package:pagina_de_marcas/model/product/sku_response.dart';
+import 'package:pagina_de_marcas/ui/screens/screen_master.dart';
 import 'package:pagina_de_marcas/ui/widgets/star_display.dart';
+
+import 'buttons.dart';
 
 class ProductCard{
 
-  Widget getDefaultProductCard(ProductResponse product){
+  Widget getDefaultProductCard(ProductResponse product, BuildContext context){
 
     SkuResponse sku = product.Skus[0];
 
@@ -70,7 +73,7 @@ class ProductCard{
                 child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     width: 200,
-                    child: getBuyButtonOrUnavaible(sku)
+                    child: getBuyButtonOrUnavaible(sku, context)
                 )
             )
           ],
@@ -121,7 +124,7 @@ class ProductCard{
     }
   }
 
-  Widget getBuyButtonOrUnavaible(SkuResponse sku) {
+  Widget getBuyButtonOrUnavaible(SkuResponse sku, BuildContext context) {
     var seller = sku.getFirstSellerWithQuantity();
 
     if (seller != null) {
@@ -137,20 +140,22 @@ class ProductCard{
       );
     }
     else {
-      return RaisedButton(
-        onPressed: () {},
-        child: Text(
-          "INDISPONÍVEL",
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 16
-          ),
+      return Theme(
+        data: Theme.of(context).copyWith(
+          buttonTheme: (ScreenMaster.searchResultElements.getButtonUnavailable()) ?? Buttons.unavailable(),
         ),
-        highlightColor: Colors.white54,
-        splashColor: Colors.white54,
-        color: Colors.grey,
-        padding: EdgeInsets.all(8),
+        child: RaisedButton(
+          onPressed: () {},
+          child: Text(
+            "INDISPONÍVEL",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 16
+            ),
+          ),
+          padding: EdgeInsets.all(8),
 
+        )
       );
     }
   }
