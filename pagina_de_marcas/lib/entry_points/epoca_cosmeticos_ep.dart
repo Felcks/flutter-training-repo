@@ -6,7 +6,7 @@ import 'package:pagina_de_marcas/store/epoca_cosmeticos/brand_spotlight_elements
 import 'package:pagina_de_marcas/store/off_premium/brand_spotlight_elements.dart';
 import 'package:pagina_de_marcas/ui/screens/screen_master.dart';
 
-import '../main.dart';
+import '../main_brand_page.dart';
 
 void main() {
 
@@ -76,7 +76,7 @@ void main() {
           color: ColorConfig.accentColor,
         ),
       ),
-      child: MyApp()
+      child: BrandPageApp()
   );
 
   runApp(configuredApp);

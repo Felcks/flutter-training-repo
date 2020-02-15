@@ -42,11 +42,6 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
       if (_floatActionButtonController.position.userScrollDirection ==
           ScrollDirection.reverse) {
         if (_isFloatButtonVisible == true) {
-          /* only set when the previous state is false
-             * Less widget rebuilds
-             */
-          print(
-              "**** ${_isFloatButtonVisible} up"); //Move IO away from setState
           setState(() {
             _isFloatButtonVisible = false;
           });
@@ -55,11 +50,6 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         if (_floatActionButtonController.position.userScrollDirection ==
             ScrollDirection.forward) {
           if (_isFloatButtonVisible == false) {
-            /* only set when the previous state is false
-               * Less widget rebuilds
-               */
-            print(
-                "**** ${_isFloatButtonVisible} down"); //Move IO away from setState
             setState(() {
               _isFloatButtonVisible = true;
             });
@@ -71,10 +61,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
 
   @override
   void didChangeDependencies() {
-    this.api = Api(context: this.context);
-    searchResponse = _postProductSearch(widget.query);
-    searchResponse.then((response) => productAmountController.setProductAmount(
-        (response.Total > 0) ? response.Total : response.Products.length));
+    if (api == null) {
+      this.api = Api(context: this.context);
+      searchResponse = _postProductSearch(widget.query);
+      searchResponse.then((response) =>
+          productAmountController.setProductAmount((response.Total > 0)
+              ? response.Total
+              : response.Products.length));
+    }
     super.didChangeDependencies();
   }
 
@@ -133,7 +127,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     double baseAspectRatio = 0.55;
     double brandAspectRatio = (FlagConfig.cardFlag.showBrand) ? 0.05 : 0;
     double starsAspectRatio = (FlagConfig.cardFlag.showStars) ? 0.05 : 0;
-    double listPriceAspectRatio =  (FlagConfig.cardFlag.showListPrice) ? 0.02 : 0;
+    double listPriceAspectRatio =
+        (FlagConfig.cardFlag.showListPrice) ? 0.02 : 0;
     double priceAspectRatio = (FlagConfig.cardFlag.showPrice) ? 0.08 : 0;
     double buyButtonAspectRatio = (FlagConfig.cardFlag.showBuyButton) ? 0.1 : 0;
 

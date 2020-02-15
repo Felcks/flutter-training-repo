@@ -16,7 +16,7 @@ import 'buttons.dart';
 class ProductCard {
 
   Widget getDefaultProductCard(ProductResponse product, BuildContext context) {
-    SkuResponse sku = product.getFirstSkuAvailable();
+    SkuResponse sku = product.getFirstSkuAvailableOrFirstAnyway();
 
     return Container(
         margin: EdgeInsets.all(5),
@@ -52,9 +52,7 @@ class ProductCard {
 
   Widget getImage(ProductResponse product){
 
-    SkuResponse sku = product.getFirstSkuAvailable();
-    if(sku == null)
-      sku = product.Skus[0];
+    SkuResponse sku = product.getFirstSkuAvailableOrFirstAnyway();
 
     return ProgressiveImage(
       placeholder: AssetImage('assets/a.png'),

@@ -22,7 +22,7 @@ class ProductResponse{
 
   Map<String, dynamic> toJson() => _$ProductResponseToJson(this);
 
-  SkuResponse getFirstSkuAvailable(){
+  SkuResponse _getFirstSkuAvailable(){
 
     for(SkuResponse element in this.Skus){
 
@@ -33,5 +33,10 @@ class ProductResponse{
     }
 
     return null;
+  }
+
+  SkuResponse getFirstSkuAvailableOrFirstAnyway(){
+
+    return _getFirstSkuAvailable() ?? Skus[0];
   }
 }
