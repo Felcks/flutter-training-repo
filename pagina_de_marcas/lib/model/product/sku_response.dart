@@ -20,6 +20,8 @@ class SkuResponse{
       if(seller.Quantity > 0)
         return seller;
     }
+
+    return null;
   }
 
   factory SkuResponse.fromJson(Map<String, dynamic> json) =>

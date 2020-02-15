@@ -14,7 +14,7 @@ import 'buttons.dart';
 
 class ProductCard {
   Widget getDefaultProductCard(ProductResponse product, BuildContext context) {
-    SkuResponse sku = product.Skus[0];
+    SkuResponse sku = product.getFirstSkuAvailable();
 
     return Container(
         margin: EdgeInsets.all(5),
@@ -53,7 +53,7 @@ class ProductCard {
                     Padding(
                       padding: EdgeInsets.all(16),
                       child: SizedBox(
-                        height: 50,
+                        height: 30,
                         child: Text(
                           product.Name,
                           maxLines: 3,
@@ -71,9 +71,9 @@ class ProductCard {
             Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    padding: EdgeInsets.only(left: 8, right: 8, bottom: 4),
                     width: 200,
-                    child: getBuyButtonOrUnavaible(sku, context)))
+                    child: getBuyButton(sku, context)))
           ],
         ));
   }
@@ -128,7 +128,10 @@ class ProductCard {
     return Container();
   }
 
-  Widget getBuyButtonOrUnavaible(SkuResponse sku, BuildContext context) {
+  Widget getBuyButton(SkuResponse sku, BuildContext context) {
+
+    if(!FlagConfig.cardFlag.showBuyButton) return Container();
+
     var seller = sku.getFirstSellerWithQuantity();
 
     if (seller != null) {

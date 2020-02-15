@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pagina_de_marcas/model/product/rating_response.dart';
+import 'package:pagina_de_marcas/model/product/seller_response.dart';
 import 'package:pagina_de_marcas/model/product/sku_response.dart';
 
 part 'product_response.g.dart';
@@ -20,5 +21,16 @@ class ProductResponse{
 
   Map<String, dynamic> toJson() => _$ProductResponseToJson(this);
 
+  SkuResponse getFirstSkuAvailable(){
 
+    for(SkuResponse element in this.Skus){
+
+      SellerResponse seller = element.getFirstSellerWithQuantity();
+      if(seller != null){
+        return element;
+      }
+    }
+
+    return null;
+  }
 }

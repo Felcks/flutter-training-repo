@@ -19,7 +19,9 @@ void main() {
     secondaryText:  Color(0xff000000),
   );
 
-  FlagConfig.cardFlag = CardFlag();
+  FlagConfig.cardFlag = CardFlag(
+    showStars: false
+  );
 
   ScreenMaster.brandSpotlightElements = OffPremiumBrandSpotlightElementsImpl();
 

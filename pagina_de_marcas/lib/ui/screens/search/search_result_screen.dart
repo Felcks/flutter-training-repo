@@ -106,7 +106,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
 
     double getCardAspectRatio(){
         double baseAspectRatio = 0.5;
-        double priceAspectRatio =  (FlagConfig.cardFlag.showPrice) ? 0.05 : 0;
+        double priceAspectRatio =  (FlagConfig.cardFlag.showPrice) ? 0.1 : 0;
         double starsAspectRatio = (FlagConfig.cardFlag.showStars) ? 0.05 : 0;
 
         return baseAspectRatio - priceAspectRatio - starsAspectRatio;
