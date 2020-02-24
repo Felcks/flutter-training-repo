@@ -27,10 +27,12 @@ class _BrandListScreenState extends State<BrandListScreen> {
   String filtered = "";
 
   @override
-  void initState() {
-    brandList = _getBrandList();
-    api = Api(context: this.context);
-    super.initState();
+  void didChangeDependencies() {
+    if(api == null) {
+      api = Api(context: this.context);
+      brandList = _getBrandList();
+    }
+    super.didChangeDependencies();
   }
 
   int filter(List<BrandResponse> list){
@@ -70,8 +72,11 @@ class _BrandListScreenState extends State<BrandListScreen> {
               break;
             case ConnectionState.done:
               if (snapshot.hasError) {
-
-                print(snapshot.error);
+                return Center(
+                  child: Text(
+                      snapshot.error.toString()
+                  ),
+                );
               }
               else {
 

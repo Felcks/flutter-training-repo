@@ -206,22 +206,27 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           break;
                         case ConnectionState.waiting:
                           return Expanded(
-                              child: Center(
-                            child: SizedBox(
-                              child: CircularProgressIndicator(
-                                strokeWidth: 5,
+                            child: Center(
+                              child: SizedBox(
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 5,
+                                ),
+                                width: 40,
+                                height: 40,
                               ),
-                              width: 40,
-                              height: 40,
-                            ),
-                          ));
+                            )
+                          );
                           break;
                         case ConnectionState.active:
                           print("active");
                           break;
                         case ConnectionState.done:
                           if (snapshot.hasError) {
-                            print(snapshot.error);
+                            return Center(
+                              child: Text(
+                                  snapshot.error.toString()
+                              ),
+                            );
                           } else {
                             return getGridView(snapshot);
                           }

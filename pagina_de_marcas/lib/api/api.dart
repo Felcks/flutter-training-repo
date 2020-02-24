@@ -50,7 +50,8 @@ class Api {
       );
     }
     else {
-      print("error ${response.body}");
+      print("error api ${response.body}");
+      throw Exception(response.body);
     }
 
     return brandList;
@@ -70,7 +71,17 @@ class Api {
         body: json.encode(request.toJson())
     );
 
-    Map parsed = json.decode(response.body);
+    Map parsed;
+    if(response.statusCode == 200){
+      parsed = json.decode(response.body);
+    }
+    else{
+      print("error api ${response.body}");
+      throw Exception(response.body);
+    }
+
+
+
 
     return SearchProductResponse.fromJson(parsed);
   }

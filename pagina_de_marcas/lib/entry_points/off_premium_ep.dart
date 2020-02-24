@@ -7,6 +7,7 @@ import 'package:pagina_de_marcas/ui/screens/brand/spotlight/brand_spotlight_elem
 import 'package:pagina_de_marcas/ui/screens/screen_master.dart';
 
 import '../main.dart';
+import '../main_brand_page.dart';
 
 void main() {
 
@@ -30,7 +31,8 @@ void main() {
   var configuredApp = new AppConfig(
     appName: 'Off Premium',
     flavorName: 'OffPremium',
-    apiBaseUrl: 'api-homolog-offpremiumv2.mobfiq.com.br',
+//    apiBaseUrl: 'api-homolog-offpremiumv2.mobfiq.com.br',
+    apiBaseUrl: 'api-offpremiumv2.mobfiq.com.br',
     themeData: ThemeData(
       brightness: Brightness.light,
       primaryColor: Color(0xff000000),
@@ -71,7 +73,7 @@ void main() {
           color: Colors.white
       ),
     ),
-    child: MyApp()
+    child: BrandPageApp()
   );
 
   runApp(configuredApp);

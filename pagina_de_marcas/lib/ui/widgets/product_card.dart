@@ -55,6 +55,7 @@ class ProductCard {
     SkuResponse sku = product.getFirstSkuAvailableOrFirstAnyway();
 
     return ProgressiveImage(
+      fit: BoxFit.contain,
       placeholder: AssetImage('assets/a.png'),
       // size: 1.87KB
       thumbnail:

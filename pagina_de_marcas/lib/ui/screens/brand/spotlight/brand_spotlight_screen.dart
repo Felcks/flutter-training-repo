@@ -28,10 +28,12 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
   Future<List<BrandResponse>> brandList;
 
   @override
-  void initState() {
-    this.api =  Api(context: this.context);
-    brandList = _getBrandList();
-    super.initState();
+  void didChangeDependencies() {
+    if (api == null) {
+      this.api = Api(context: this.context);
+      brandList = _getBrandList();
+    }
+    super.didChangeDependencies();
   }
 
   @override
@@ -66,8 +68,11 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                   break;
                 case ConnectionState.done:
                   if (snapshot.hasError) {
-
-                    print(snapshot.error);
+                    return Center(
+                      child: Text(
+                        snapshot.error.toString()
+                      ),
+                    );
                   }
                   else {
                     return Column(
