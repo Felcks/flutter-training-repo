@@ -92,58 +92,69 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(0),
                                     color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey[300],
-                                          blurRadius: 3.0
-                                      )
-                                    ],
+                                    border: Border.all(
+                                      color: Colors.grey[300],
+                                      width: 1,
+                                    )
                                   ),
                                   child: Material(
                                     color: Colors.white,
-                                    child: InkWell(
-                                      onTap: (){
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => SearchResultScreen(brand.Name))
-                                        );
-                                      },
                                       child: Container(
-                                          height: 100,
+                                          height: 80,
                                           width: 320,
-                                          padding: EdgeInsets.all(16),
                                           child: Stack(
                                             children: <Widget>[
-                                              Align(
-                                                  alignment: Alignment.centerLeft,
-                                                  child: Row(
-                                                    children: <Widget>[
-                                                      Container(
-                                                        height: 200,
-                                                        width: 80,
-                                                        decoration: BoxDecoration(
-                                                            image: DecorationImage(
-                                                                image: NetworkImage(brand.ImageUrl)
-                                                            )
+                                              Positioned.fill(
+                                                  child: Container(
+                                                    padding: EdgeInsets.all(16),
+                                                    child: Row(
+                                                      children: <Widget>[
+                                                        Image.network(
+                                                          brand.ImageUrl,
+                                                          height: 200,
+                                                          width: 80,
                                                         ),
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.only(left: 32),
-                                                        child: Text(
-                                                          brand.Name,
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 22,
+//                                                      Container(
+//                                                        height: 200,
+//                                                        width: 80,
+//                                                        decoration: BoxDecoration(
+//                                                            image: DecorationImage(
+//                                                                image: NetworkImage(brand.ImageUrl)
+//                                                            )
+//                                                        ),
+//                                                      ),
+                                                        Padding(
+                                                          padding: EdgeInsets.only(left: 32),
+                                                          child: Text(
+                                                            brand.Name,
+                                                            style: TextStyle(
+                                                              color: Colors.black,
+                                                              fontSize: 22,
+                                                            ),
                                                           ),
-                                                        ),
-                                                      )
-                                                    ],
+                                                        )
+                                                      ],
+                                                    ),
                                                   )
                                               ),
+                                              Positioned.fill(
+                                                child: Material(
+                                                    color: Colors.transparent,
+                                                    child: InkWell(
+                                                      highlightColor: Colors.grey[350].withOpacity(0.2),
+                                                      splashColor: Colors.grey[350].withOpacity(0.2),
+                                                      onTap: (){
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(builder: (context) => SearchResultScreen(brand.Name))
+                                                        );
+                                                      },
+                                                    )
+                                                )
+                                              )
                                             ],
                                           )
                                       ),
-                                    ),
                                   ),
                                 );
                               }
