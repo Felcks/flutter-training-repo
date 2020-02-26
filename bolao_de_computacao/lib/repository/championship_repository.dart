@@ -7,11 +7,21 @@ class ChampionshipRepository{
 
   static Championship getBrasileirao2020(){
 
-    Game game1 = Game(TeamBaseRepository.flamengo, TeamBaseRepository.bragantino);
-    Game game2 = Game(TeamBaseRepository.bragantino, TeamBaseRepository.flamengo);
-    Round round = Round(0, [game1, game2]);
+    Round round = Round(0, [
+        Game(TeamBaseRepository.corinthians, TeamBaseRepository.ceara),
+        Game(TeamBaseRepository.botafogo, TeamBaseRepository.coritiba),
+        Game(TeamBaseRepository.palmeiras, TeamBaseRepository.fluminense),
+        Game(TeamBaseRepository.goias, TeamBaseRepository.gremio),
+        Game(TeamBaseRepository.vasco, TeamBaseRepository.saoPaulo),
+        Game(TeamBaseRepository.fortaleza, TeamBaseRepository.flamengo),
+        Game(TeamBaseRepository.bragantino, TeamBaseRepository.atleticoMG),
+        Game(TeamBaseRepository.athleticoPR, TeamBaseRepository.atleticoGO),
+        Game(TeamBaseRepository.sport, TeamBaseRepository.santos),
+        Game(TeamBaseRepository.internacional, TeamBaseRepository.bahia),
 
-    Championship championship = Championship(0, 1, [round]);
+    ]);
+
+    Championship championship = Championship("Brasileirão", 0, 2, [round, round]);
 
     return championship;
   }

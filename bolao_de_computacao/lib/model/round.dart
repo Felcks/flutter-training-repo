@@ -7,8 +7,8 @@ class Round{
 
   Round(this.number, this.games);
 
-  String getRoundTitle(){
-    return "Rodada $number";
+  String getTitle(){
+    return "Rodada ${number+1}";
   }
 
   String getAllGamesText(){
@@ -17,14 +17,13 @@ class Round{
     games.forEach((game){
 
       if(text.isEmpty){
-        text = "$text/n${game.getScoreboard()}";
+        text += "${game.getScoreboard()}";
       }
       else {
-        text = "${game.getScoreboard()}";
+        text += "\n${game.getScoreboard()}";
       }
     });
 
     return text;
   }
-
 }

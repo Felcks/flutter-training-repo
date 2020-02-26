@@ -31,68 +31,109 @@ class _HomeState extends State<Home> {
         title: Text("Bolão de Computação"),
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 16, right: 16),
-        child: ListView.builder(
-          itemCount: brasileirao2020.rounds[brasileirao2020.currentRound].games.length,
-          itemBuilder: (context, index) {
-            return  Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  brasileirao2020.rounds[brasileirao2020.currentRound].games[index].ownerTeam.imageURL,
-                  height: 60.0,
-                  width: 60.0,
-                ),
-                NumberPicker.integer(
-                    initialValue:  brasileirao2020.rounds[brasileirao2020.currentRound].games[index].ownerTeam.score,
-                    highlightSelectedValue: true,
-                    minValue: 0,
-                    maxValue: 10,
-                    onChanged: (newValue) =>
-                        setState(() => brasileirao2020.rounds[brasileirao2020.currentRound].games[index].ownerTeam.score = newValue)),
-                Text(
-                  "X",
-                  style: TextStyle(
-                    fontSize: 30
+        padding: EdgeInsets.only(bottom: 92),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              color: Colors.black.withOpacity(0.7),
+              child:  Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  IconButton(
+                    onPressed: (){},
+                    icon: Icon(Icons.arrow_back),
+                    color: Colors.white,
                   ),
-                ),
-                NumberPicker.integer(
-                    initialValue:  brasileirao2020.rounds[brasileirao2020.currentRound].games[index].visitingTeam.score,
-                    highlightSelectedValue: true,
-                    minValue: 0,
-                    maxValue: 10,
-                    onChanged: (newValue) =>
-                        setState(() => brasileirao2020.rounds[brasileirao2020.currentRound].games[index].visitingTeam.score = newValue)),
-                Image.asset(
-                  brasileirao2020.rounds[brasileirao2020.currentRound].games[index].visitingTeam.imageURL,
-                  height: 60.0,
-                  width: 60.0,
-                ),
-              ]
-            );
-          },
-        ),
-//        child: Column(
-//          children: <Widget>[
-//            Row(
-//              children: [
-//                Image.asset(
-//                  "images/Flamengo.png",
-//                  height: 60.0,
-//                  width: 60.0,
-//                ),
-//                NumberPicker.integer(
-//                    initialValue: Flamengo.score,
-//                    highlightSelectedValue: true,
-//                    minValue: 0,
-//                    maxValue: 10,
-//                    onChanged: (newValue) =>
-//                        setState(() => Flamengo.score = newValue)),
-//              ]
-//            ),
-//          ],
-//        ),
+                  FlatButton(
+                    onPressed: (){
+
+                    },
+                    padding: EdgeInsets.all(20),
+                    shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(1.0)),
+                    child: Text(
+                      brasileirao2020.getTitle(),
+                      style: TextStyle(
+                        color: Colors.white
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: (){
+                      if(brasileirao2020.currentRound < brasileirao2020.roundAmount-1){
+                        setState(() {
+                          brasileirao2020.currentRound += 1;
+                          print(brasileirao2020.currentRound);
+                        });
+                      }
+                    },
+                    icon: Icon(Icons.arrow_forward),
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: brasileirao2020.rounds[brasileirao2020.currentRound].games.length,
+                itemBuilder: (context, index) {
+                  return  Container(
+                      padding: EdgeInsets.only(left: 16, right: 16),
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey[300],
+                            width: 1,
+                          )
+                      ),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              brasileirao2020.rounds[brasileirao2020.currentRound].games[index].ownerTeam.imageURL,
+                              height: 40.0,
+                              width: 40.0,
+                            ),
+                            NumberPicker.integer(
+                                initialValue:  brasileirao2020.rounds[brasileirao2020.currentRound].games[index].ownerTeam.score,
+                                highlightSelectedValue: true,
+                                scrollDirection: Axis.vertical,
+                                itemExtent: 30,
+                                listViewWidth: 50,
+                                zeroPad: false,
+                                minValue: 0,
+                                maxValue: 10,
+                                onChanged: (newValue) =>
+                                    setState(() => brasileirao2020.rounds[brasileirao2020.currentRound].games[index].ownerTeam.score = newValue)),
+                            Text(
+                              "X",
+                              style: TextStyle(
+                                  fontSize: 30
+                              ),
+                            ),
+                            NumberPicker.integer(
+                                initialValue:  brasileirao2020.rounds[brasileirao2020.currentRound].games[index].visitingTeam.score,
+                                highlightSelectedValue: true,
+                                scrollDirection: Axis.vertical,
+                                listViewWidth: 50,
+                                itemExtent: 30,
+                                minValue: 0,
+                                maxValue: 10,
+                                onChanged: (newValue) =>
+                                    setState(() => brasileirao2020.rounds[brasileirao2020.currentRound].games[index].visitingTeam.score = newValue)),
+                            Image.asset(
+                              brasileirao2020.rounds[brasileirao2020.currentRound].games[index].visitingTeam.imageURL,
+                              height: 40.0,
+                              width: 40.0,
+                            ),
+                          ]
+                      )
+                  );
+                },
+              ),
+            )
+          ],
+        )
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: (){
@@ -102,7 +143,6 @@ class _HomeState extends State<Home> {
               );
               _scaffoldKey.currentState.showSnackBar(snackBar);
             });
-            //print("${Flamengo.name} ${Flamengo.score}X${Flamengo.score} ${Flamengo.name}");
           },
           label: Text("Gerar texto Whatsapp"),
       ),

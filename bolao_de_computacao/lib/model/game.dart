@@ -13,7 +13,7 @@ class Game{
   }
 
   String getScoreboard(){
-    return  "${ownerTeam.name} ${ownerTeam.score}X${visitingTeam.score} ${visitingTeam.name}";
+    return  "${ownerTeam.name}\t${ownerTeam.score}\t${visitingTeam.score}\t${visitingTeam.name}";
   }
 
 }
