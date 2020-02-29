@@ -1,50 +1,45 @@
+import 'models/client.dart';
 import 'package:mobx/mobx.dart';
-
-import 'model/client.dart';
 
 part 'controller.g.dart';
 
 class Controller = _ControllerBase with _$Controller;
 
-abstract class _ControllerBase with Store{
+abstract class _ControllerBase with Store {
+  var client = Client();
 
- var client = Client();
+  @computed
+  bool get isValid {
+    return validateName() == null && validateEmail() == null;
+  }
+  
+  String validateName() {
+    if (client.name == null || client.name.isEmpty) {
+      return "Campo obrigatório";
+    } else if (client.name.length < 3) {
+      return "Campo precisa de 3 characteres";
+    }
 
- @computed
- bool get isValid {
-   return validateName() == null && validateEmail() == null;
- }
+    return null;
+  }
 
- String validateName(){
-   if(client.name == null || client.name.isEmpty){
-     return "Campo obrigatório";
-   }
-   else if(client.name.length < 3){
-     return "Campo precisa de 3 characteres";
-   }
+  String validateEmail() {
+    if (client.email == null || client.email.isEmpty) {
+      return "Campo obrigatório";
+    } else if (!client.email.contains("@")) {
+      return "Não é um email válido";
+    }
 
-   return null;
- }
+    return null;
+  }
 
- String validateEmail(){
-   if(client.email == null || client.email.isEmpty){
-     return "Campo obrigatório";
-   }
-   else if(!client.email.contains("@")){
-     return "Não é um email válido";
-   }
+  String validateCpf() {
+    if (client.name == null || client.name.isEmpty) {
+      return "Campo obrigatório";
+    } else if (client.name.length < 3) {
+      return "Campo precisa de 3 characteres";
+    }
 
-   return null;
- }
-
- String validateCpf(){
-   if(client.name == null || client.name.isEmpty){
-     return "Campo obrigatório";
-   }
-   else if(client.name.length < 3){
-     return "Campo precisa de 3 characteres";
-   }
-
-   return null;
- }
+    return null;
+  }
 }
