@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'config/app_config.dart';
-import 'ui/home.dart';
+import 'app/config/app_config.dart';
+import 'package:bolao_de_computacao/app/pages/home/home.dart';
 
 void main() {
 

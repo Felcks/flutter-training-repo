@@ -1,7 +1,7 @@
-import 'package:bolao_de_computacao/model/championship.dart';
-import 'package:bolao_de_computacao/model/game.dart';
-import 'package:bolao_de_computacao/model/round.dart';
-import 'package:bolao_de_computacao/repository/team_base_repository.dart';
+import 'package:bolao_de_computacao/app/model/championship.dart';
+import 'package:bolao_de_computacao/app/model/game.dart';
+import 'package:bolao_de_computacao/app/model/round.dart';
+import 'package:bolao_de_computacao/app/repository/team_base_repository.dart';
 
 class ChampionshipRepository{
 

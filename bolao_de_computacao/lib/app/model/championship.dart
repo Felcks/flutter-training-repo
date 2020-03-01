@@ -1,4 +1,4 @@
-import 'package:bolao_de_computacao/model/round.dart';
+import 'package:bolao_de_computacao/app/model/round.dart';
 
 class Championship{
 

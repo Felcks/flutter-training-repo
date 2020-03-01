@@ -1,5 +1,5 @@
-import 'package:bolao_de_computacao/model/team.dart';
-import 'package:bolao_de_computacao/model/team_base.dart';
+import 'package:bolao_de_computacao/app/model/team.dart';
+import 'package:bolao_de_computacao/app/model/team_base.dart';
 
 class Game{
 
