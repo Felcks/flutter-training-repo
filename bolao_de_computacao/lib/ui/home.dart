@@ -37,7 +37,13 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (brasileirao2020.currentRound > 0) {
+                          setState(() {
+                            brasileirao2020.currentRound -= 1;
+                          });
+                        }
+                      },
                       icon: Icon(Icons.arrow_back),
                       color: Colors.white,
                     ),
@@ -57,7 +63,6 @@ class _HomeState extends State<Home> {
                             brasileirao2020.roundAmount - 1) {
                           setState(() {
                             brasileirao2020.currentRound += 1;
-                            print(brasileirao2020.currentRound);
                           });
                         }
                       },

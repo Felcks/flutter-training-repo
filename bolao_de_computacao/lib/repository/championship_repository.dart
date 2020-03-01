@@ -8,20 +8,35 @@ class ChampionshipRepository{
   static Championship getBrasileirao2020(){
 
     Round round = Round(0, [
-        Game(TeamBaseRepository.corinthians, TeamBaseRepository.ceara),
-        Game(TeamBaseRepository.botafogo, TeamBaseRepository.coritiba),
-        Game(TeamBaseRepository.palmeiras, TeamBaseRepository.fluminense),
-        Game(TeamBaseRepository.goias, TeamBaseRepository.gremio),
-        Game(TeamBaseRepository.vasco, TeamBaseRepository.saoPaulo),
-        Game(TeamBaseRepository.fortaleza, TeamBaseRepository.flamengo),
-        Game(TeamBaseRepository.bragantino, TeamBaseRepository.atleticoMG),
-        Game(TeamBaseRepository.athleticoPR, TeamBaseRepository.atleticoGO),
-        Game(TeamBaseRepository.sport, TeamBaseRepository.santos),
-        Game(TeamBaseRepository.internacional, TeamBaseRepository.bahia),
+        Game(TeamBaseRepository.flamengo, TeamBaseRepository.atleticoMG),
+        Game(TeamBaseRepository.botafogo, TeamBaseRepository.bahia),
+        Game(TeamBaseRepository.goias, TeamBaseRepository.saoPaulo),
+        Game(TeamBaseRepository.fortaleza, TeamBaseRepository.athleticoPR),
+        Game(TeamBaseRepository.coritiba, TeamBaseRepository.internacional),
+        Game(TeamBaseRepository.sport, TeamBaseRepository.ceara),
+        Game(TeamBaseRepository.gremio, TeamBaseRepository.fluminense),
+        Game(TeamBaseRepository.corinthians, TeamBaseRepository.atleticoGO),
+        Game(TeamBaseRepository.santos, TeamBaseRepository.bragantino),
+        Game(TeamBaseRepository.palmeiras, TeamBaseRepository.vasco),
 
     ]);
 
-    Championship championship = Championship("Brasileirão", 0, 2, [round, round]);
+    Round round2 = Round(1, [
+        Game(TeamBaseRepository.saoPaulo, TeamBaseRepository.fortaleza),
+        Game(TeamBaseRepository.atleticoGO, TeamBaseRepository.flamengo),
+        Game(TeamBaseRepository.ceara, TeamBaseRepository.gremio),
+        Game(TeamBaseRepository.athleticoPR, TeamBaseRepository.goias),
+        Game(TeamBaseRepository.bahia, TeamBaseRepository.coritiba),
+        Game(TeamBaseRepository.internacional, TeamBaseRepository.santos),
+        Game(TeamBaseRepository.atleticoMG, TeamBaseRepository.corinthians),
+        Game(TeamBaseRepository.bragantino, TeamBaseRepository.botafogo),
+        Game(TeamBaseRepository.vasco, TeamBaseRepository.sport),
+        Game(TeamBaseRepository.fluminense, TeamBaseRepository.palmeiras),
+
+    ]);
+
+
+    Championship championship = Championship("Brasileirão", 0, 2, [round, round2]);
 
     return championship;
   }
