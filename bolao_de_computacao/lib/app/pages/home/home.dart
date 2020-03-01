@@ -3,7 +3,10 @@ import 'package:bolao_de_computacao/app/pages/home/components/game_card_widget.d
 import 'package:bolao_de_computacao/app/repository/championship_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:numberpicker/numberpicker.dart';
+
+import 'home_controller.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,12 +14,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Championship brasileirao2020;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final HomeController controller = HomeController();
 
   @override
   void initState() {
-    brasileirao2020 = ChampionshipRepository.getBrasileirao2020();
     super.initState();
   }
 
@@ -39,32 +41,29 @@ class _HomeState extends State<Home> {
                   children: <Widget>[
                     IconButton(
                       onPressed: () {
-                        if (brasileirao2020.currentRound > 0) {
-                          setState(() {
-                            brasileirao2020.currentRound -= 1;
-                          });
+                        if (controller.canDecreaseRound) {
+                          controller.decreaseRound();
                         }
                       },
                       icon: Icon(Icons.arrow_back),
                       color: Colors.white,
                     ),
-                    FlatButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(20),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(1.0)),
-                      child: Text(
-                        brasileirao2020.getTitle(),
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+                    Observer(builder: (_) {
+                      return FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(20),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(1.0)),
+                        child: Text(
+                          controller.championship.getTitle(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      );
+                    }),
                     IconButton(
                       onPressed: () {
-                        if (brasileirao2020.currentRound <
-                            brasileirao2020.roundAmount - 1) {
-                          setState(() {
-                            brasileirao2020.currentRound += 1;
-                          });
+                        if (controller.canIncreaseRound) {
+                          controller.increaseRound();
                         }
                       },
                       icon: Icon(Icons.arrow_forward),
@@ -74,23 +73,24 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Expanded(
-                  child: ListView.builder(
-                      itemCount: brasileirao2020
-                          .rounds[brasileirao2020.currentRound].games.length,
-                      itemBuilder: (context, index) {
-                        return GameCardWidget(
-                          game: brasileirao2020
-                              .rounds[brasileirao2020.currentRound]
-                              .games[index],
-                        );
-                      })),
+                child: Observer(
+                  builder: (_) {
+                    return ListView.builder(
+                        itemCount: controller.gameList.length,
+                        itemBuilder: (context, index) {
+                          return GameCardWidget(
+                            game: controller.gameList[index],
+                          );
+                        });
+                  },
+                ),
+              )
             ],
           )),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Clipboard.setData(ClipboardData(
-                  text: brasileirao2020.rounds[brasileirao2020.currentRound]
-                      .getAllGamesText()))
+                  text: controller.currentRound.getAllGamesText()))
               .then((result) {
             final snackBar = SnackBar(
               content: Text('Copiado para a área de transferência'),
