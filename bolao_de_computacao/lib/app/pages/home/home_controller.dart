@@ -23,14 +23,12 @@ abstract class _HomeControllerBase with Store {
   increaseRound(){
     championship.currentRound += 1;
     gameList = championship.rounds[championship.currentRound].games.asObservable();
-    print(gameList[0].ownerTeam.score);
   }
 
   @action
   decreaseRound(){
     championship.currentRound -= 1;
     gameList = championship.rounds[championship.currentRound].games.asObservable();
-    print(gameList[0].ownerTeam.score);
   }
 
   @computed
