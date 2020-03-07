@@ -11,23 +11,61 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
-  //use 'controller' variable to access controller
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+        body: SafeArea(
+      child: Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Spacer(
+              flex: 20,
+            ),
+            RaisedButton(
+              onPressed: () {},
+              color: Colors.blue,
+              shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                color: Colors.blue,
+              )),
+              padding: EdgeInsets.all(16),
+              child: Text("ENTRAR COM FACEBOOK"),
+            ),
+            Spacer(
+              flex: 1,
+            ),
+            RaisedButton(
+              onPressed: () {
+                Modular.to.pushNamed('/login/register');
+              },
+              color: Colors.orange,
+              shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                color: Colors.orange,
+              )),
+              padding: EdgeInsets.all(16),
+              child: Text(
+                "CADASTRAR COM EMAIL",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            Spacer(),
+            RaisedButton(
+              onPressed: () {
+                Modular.to.pushNamed('/login');
+              },
+              padding: EdgeInsets.all(16),
+              child: Text("FAZER LOGIN"),
+            ),
+            Spacer(
+              flex: 10,
+            ),
+          ],
+        ),
       ),
-      body: Column(
-        children: <Widget>[
-          RaisedButton(
-            onPressed: () {
-              Modular.to.pushReplacementNamed('/login');
-            },
-          )
-        ],
-      ),
-    );
+    ));
   }
 }

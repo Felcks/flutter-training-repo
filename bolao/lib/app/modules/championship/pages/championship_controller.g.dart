@@ -60,6 +60,17 @@ mixin _$ChampionshipController on _ChampionshipControllerBase, Store {
   }
 
   @override
+  dynamic fetchJackpotList() {
+    final _$actionInfo =
+        _$_ChampionshipControllerBaseActionController.startAction();
+    try {
+      return super.fetchJackpotList();
+    } finally {
+      _$_ChampionshipControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setCurrentPage(int newPage) {
     final _$actionInfo =
         _$_ChampionshipControllerBaseActionController.startAction();

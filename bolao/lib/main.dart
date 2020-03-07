@@ -36,26 +36,25 @@ void main() {
             title:
                 TextStyle(color: ColorConfig.lightPrimaryColor, fontSize: 20),
             body1: TextStyle(
-              color: ColorConfig.accentColor,
+              color: ColorConfig.lightPrimaryColor,
             ),
             button: TextStyle(
-              color: ColorConfig.accentColor,
+              color: ColorConfig.lightPrimaryColor,
             ),
           ),
           iconTheme: IconThemeData(
-            color: ColorConfig.accentColor,
+            color: ColorConfig.lightPrimaryColor,
           ),
         ),
         buttonTheme: ButtonThemeData(
             buttonColor: ColorConfig.accentColor,
             textTheme: ButtonTextTheme.primary,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32),
                 side: BorderSide(
                   color: ColorConfig.accentColor,
                 ))),
         iconTheme: IconThemeData(
-          color: ColorConfig.accentColor,
+          color: ColorConfig.lightPrimaryColor,
         ),
       ),
       child: ModularApp(module: AppModule()));
