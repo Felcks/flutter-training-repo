@@ -1,3 +1,4 @@
+import 'package:bolao/app/utils/color_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -67,6 +68,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
     return WillPopScope(
         onWillPop: _onWillPop,
         child: Scaffold(
+          resizeToAvoidBottomPadding: false,
           appBar: AppBar(
             title: Text(widget.title),
           ),
@@ -104,12 +106,9 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 ),
                 Observer(builder: (_) {
                   return RaisedButton(
-                    onPressed: controller.isValid
-                        ? () {
-                            print("aaa");
-                          }
-                        : null,
-                    color: Colors.blue,
+                    onPressed: controller.isValid ? () {
+                      Modular.to.pushReplacementNamed("/championship");
+                    } : null,
                     disabledColor: Colors.grey,
                     padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
                     shape: RoundedRectangleBorder(
@@ -128,8 +127,8 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                   onPressed: () {
                     Modular.to.pushNamed('/login/register');
                   },
-                  color: Colors.blue,
                   disabledColor: Colors.grey,
+                  color: ColorConfig.darkPrimaryColor,
                   padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),

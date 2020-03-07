@@ -1,6 +1,5 @@
+import 'package:bolao/app/modules/login/models/client.dart';
 import 'package:mobx/mobx.dart';
-
-import 'models/client.dart';
 
 part 'login_controller.g.dart';
 
