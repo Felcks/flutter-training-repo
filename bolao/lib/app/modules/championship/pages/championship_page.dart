@@ -84,6 +84,7 @@ class _ChampionshipPageState
       ),
       floatingActionButton: SpeedDial(
         animatedIcon: AnimatedIcons.menu_close,
+        closeManually: false,
         children: [
           SpeedDialChild(
             child: Icon(Icons.add),

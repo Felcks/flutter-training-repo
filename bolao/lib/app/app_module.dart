@@ -1,5 +1,6 @@
 import 'package:bolao/app/app_controller.dart';
 import 'package:bolao/app/modules/championship/championship_module.dart';
+import 'package:bolao/app/modules/jackpot/jackpot_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:bolao/app/app_widget.dart';
@@ -19,6 +20,7 @@ class AppModule extends MainModule {
         Router('/login', module: LoginModule()),
         Router('/home', module: HomeModule()),
         Router('/championship', module: ChampionshipModule()),
+        Router('/jackpot', module: JackpotModule()),
       ];
 
   @override
