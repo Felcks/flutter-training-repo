@@ -21,7 +21,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends ModularState<HomePage, HomeController> {
   List<Widget> screens = [
     JackpotRankingPage(),
-    JackpotOverallRanking(),
     JackpotRoundPage(),
     JackpotRulesPage(),
     JackpotBetPage()
@@ -56,11 +55,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             items: [
               BottomNavigationBarItem(
                 icon: new Icon(Icons.radio_button_checked),
-                title: new Text('R.Rodada'),
-              ),
-              BottomNavigationBarItem(
-                icon: new Icon(Icons.radio_button_checked),
-                title: new Text('R.Geral'),
+                title: new Text('Ranking'),
               ),
               BottomNavigationBarItem(
                 icon: new Icon(Icons.radio_button_checked),

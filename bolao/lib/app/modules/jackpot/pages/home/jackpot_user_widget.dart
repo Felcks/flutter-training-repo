@@ -2,7 +2,6 @@ import 'package:bolao/app/modules/jackpot/models/jackpot_user.dart';
 import 'package:flutter/material.dart';
 
 class JackpotUserWidget extends StatelessWidget {
-
   final JackpotUser jackpotUser;
 
   JackpotUserWidget(this.jackpotUser);
@@ -49,10 +48,57 @@ class JackpotUserWidget extends StatelessWidget {
                   ),
                 ),
               ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  padding: EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Spacer(
+                        flex: 25,
+                      ),
+                      Text(
+                        "+${jackpotUser.roundScore.toString()}",
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                      Spacer(),
+                      SizedBox(
+                        width: 40,
+                        child: Text(
+                          jackpotUser.score.toString(),
+                          textAlign: TextAlign.end,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Spacer(),
+                      _getArrowIcon(),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _getArrowIcon() {
+    if (jackpotUser.ranking < jackpotUser.rankingsWithoutRoundPoints)
+      return Icon(
+        Icons.arrow_drop_up,
+        color: Colors.green,
+      );
+    else if (jackpotUser.ranking > jackpotUser.rankingsWithoutRoundPoints)
+      return Icon(
+        Icons.arrow_drop_down,
+        color: Colors.red,
+      );
+    else
+      return Icon(
+        Icons.remove,
+        color: Colors.blue,
+      );
   }
 }

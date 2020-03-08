@@ -36,4 +36,20 @@ abstract class _HomeControllerBase with Store {
     list.sort((a, b) => b.score - a.score);
     return list;
   }
+
+  @action
+  void rankingUsersWithouRoundScore(JackpotUser user){
+    var list = jackpot.users.map( (JackpotUser it) {
+        it.score = it.score - it.roundScore;
+        return user;
+    });
+
+    for(var count = 1; count <= list.length; count++){
+      if(list.elementAt(count-1).name == user.name){
+        user.rankingsWithoutRoundPoints = count;
+      }
+    }
+
+  }
+
 }
