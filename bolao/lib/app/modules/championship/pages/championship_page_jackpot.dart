@@ -1,7 +1,7 @@
-import 'package:bolao/app/modules/championship/models/jackpot.dart';
 import 'package:bolao/app/modules/championship/pages/championship_controller.dart';
 import 'package:bolao/app/modules/championship/pages/championship_widget.dart';
 import 'package:bolao/app/modules/championship/pages/jackpot_widget.dart';
+import 'package:bolao/app/modules/jackpot/models/jackpot.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';

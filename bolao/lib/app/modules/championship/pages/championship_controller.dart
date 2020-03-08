@@ -1,7 +1,7 @@
 import 'package:bolao/app/modules/championship/models/championship.dart';
-import 'package:bolao/app/modules/championship/models/jackpot.dart';
-import 'package:bolao/app/modules/championship/repositories/championship_repo.dart';
-import 'package:bolao/app/modules/championship/repositories/jackpot_repo.dart';
+import 'package:bolao/app/modules/championship/repositories/championship_repository.dart';
+import 'package:bolao/app/modules/jackpot/models/jackpot.dart';
+import 'package:bolao/app/modules/jackpot/repositories/jackpot_repository.dart';
 import 'package:mobx/mobx.dart';
 
 part 'championship_controller.g.dart';
@@ -18,8 +18,8 @@ abstract class _ChampionshipControllerBase with Store {
   ObservableFuture<List<Championship>> championshipList;
   ObservableFuture<List<Jackpot>> jackpotList;
 
-  ChampionshipRepo championshipRepo;
-  JackpotRepo jackpotRepo;
+  ChampionshipRepository championshipRepo;
+  JackpotRepository jackpotRepo;
 
   _ChampionshipControllerBase(this.championshipRepo, this.jackpotRepo) {
     fetchChampionshipList();

@@ -15,11 +15,16 @@ class ChampionshipPage extends StatefulWidget {
 }
 
 class _ChampionshipPageState
-    extends ModularState<ChampionshipPage, ChampionshipController> {
+    extends ModularState<ChampionshipPage, ChampionshipController>
+    with AutomaticKeepAliveClientMixin<ChampionshipPage> {
   List<Widget> screens = [ChampionshipListPage(), ChampionshipJackpotPage()];
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       drawer: Drawer(
         child: ListView(
@@ -87,12 +92,7 @@ class _ChampionshipPageState
         closeManually: false,
         children: [
           SpeedDialChild(
-            child: Icon(Icons.add),
-            label: "Criar bolão",
-            onTap: () {
-              
-            }
-          ),
+              child: Icon(Icons.add), label: "Criar bolão", onTap: () {}),
         ],
       ),
     );

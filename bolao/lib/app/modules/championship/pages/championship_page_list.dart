@@ -31,21 +31,22 @@ class _ChampionshipListPageState
       }
 
       return Container(
-          child: Scrollbar(
-            child: ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              itemCount: controller.championshipList.value.length,
-              itemBuilder: (BuildContext context, int index) {
-                Championship championship =
-                    controller.championshipList.value[index];
-                return ChampionshipWidget(
-                    item: championship,
-                    onClicked: () {
-                      //TODO enter in the championshiop
-                    });
-              },
-            ),
-          ));
+        child: Scrollbar(
+          child: ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            itemCount: controller.championshipList.value.length,
+            itemBuilder: (BuildContext context, int index) {
+              Championship championship =
+                  controller.championshipList.value[index];
+              return ChampionshipWidget(
+                  item: championship,
+                  onClicked: () {
+                    //TODO enter in the championshiop
+                  });
+            },
+          ),
+        ),
+      );
     });
   }
 }

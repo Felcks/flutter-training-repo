@@ -1,4 +1,4 @@
-import 'package:bolao/app/modules/championship/models/jackpot.dart';
+import 'package:bolao/app/modules/jackpot/models/jackpot.dart';
 import 'package:flutter/material.dart';
 
 class JackpotWidget extends StatelessWidget {
