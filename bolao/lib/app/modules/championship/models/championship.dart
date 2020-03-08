@@ -8,8 +8,7 @@ abstract class _ChampionshipBase with Store {
   @observable
   String name;
 
-  @observable
-  int currentRound;
+  int _currentRound;
 
   @observable
   int roundAmount;
@@ -18,9 +17,11 @@ abstract class _ChampionshipBase with Store {
   List<Round> rounds;
 
   _ChampionshipBase(
-      this.name, this.currentRound, this.roundAmount, this.rounds);
+      this.name, this._currentRound, this.roundAmount, this.rounds);
 
-  String getTitle() {
-    return "$name - ${this.rounds[currentRound].getTitle()}";
+  String getTitle(int round) {
+    return "$name - ${this.rounds[round].getTitle()}";
   }
+  
+  int getCurrentRound() => this._currentRound;
 }

@@ -21,12 +21,11 @@ mixin _$HomeController on _HomeControllerBase, Store {
   bool get canIncreaseRound => (_$canIncreaseRoundComputed ??=
           Computed<bool>(() => super.canIncreaseRound))
       .value;
-  Computed<Round> _$currentRoundComputed;
+  Computed<Round> _$roundComputed;
 
   @override
-  Round get currentRound =>
-      (_$currentRoundComputed ??= Computed<Round>(() => super.currentRound))
-          .value;
+  Round get round =>
+      (_$roundComputed ??= Computed<Round>(() => super.round)).value;
 
   final _$jackpotAtom = Atom(name: '_HomeControllerBase.jackpot');
 
@@ -60,6 +59,23 @@ mixin _$HomeController on _HomeControllerBase, Store {
       super.currentPage = value;
       _$currentPageAtom.reportChanged();
     }, _$currentPageAtom, name: '${_$currentPageAtom.name}_set');
+  }
+
+  final _$currentRoundAtom = Atom(name: '_HomeControllerBase.currentRound');
+
+  @override
+  int get currentRound {
+    _$currentRoundAtom.context.enforceReadPolicy(_$currentRoundAtom);
+    _$currentRoundAtom.reportObserved();
+    return super.currentRound;
+  }
+
+  @override
+  set currentRound(int value) {
+    _$currentRoundAtom.context.conditionallyRunInAction(() {
+      super.currentRound = value;
+      _$currentRoundAtom.reportChanged();
+    }, _$currentRoundAtom, name: '${_$currentRoundAtom.name}_set');
   }
 
   final _$gameListAtom = Atom(name: '_HomeControllerBase.gameList');
@@ -155,7 +171,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   String toString() {
     final string =
-        'jackpot: ${jackpot.toString()},currentPage: ${currentPage.toString()},gameList: ${gameList.toString()},canDecreaseRound: ${canDecreaseRound.toString()},canIncreaseRound: ${canIncreaseRound.toString()},currentRound: ${currentRound.toString()}';
+        'jackpot: ${jackpot.toString()},currentPage: ${currentPage.toString()},currentRound: ${currentRound.toString()},gameList: ${gameList.toString()},canDecreaseRound: ${canDecreaseRound.toString()},canIncreaseRound: ${canIncreaseRound.toString()},round: ${round.toString()}';
     return '{$string}';
   }
 }

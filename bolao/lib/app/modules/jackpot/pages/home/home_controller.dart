@@ -16,11 +16,18 @@ abstract class _HomeControllerBase with Store {
   int currentPage = 0;
 
   @observable
+  int currentRound = 0;
+
+  @observable
   ObservableList<Game> gameList = [].cast<Game>().asObservable();
 
   @action
   setJackpot(Jackpot jackpot) {
     this.jackpot = jackpot;
+    this.gameList = jackpot
+        .championship.rounds[jackpot.championship.getCurrentRound()].games
+        .asObservable();
+    this.currentRound = jackpot.championship.getCurrentRound();
   }
 
   @action
@@ -58,28 +65,28 @@ abstract class _HomeControllerBase with Store {
 
   @action
   increaseRound() {
-    jackpot.championship.currentRound += 1;
+    this.currentRound += 1;
     gameList = jackpot
-        .championship.rounds[jackpot.championship.currentRound].games
+        .championship.rounds[this.currentRound].games
         .asObservable();
   }
 
   @action
   decreaseRound() {
-    jackpot.championship.currentRound -= 1;
+    this.currentRound -= 1;
     gameList = jackpot
-        .championship.rounds[jackpot.championship.currentRound].games
+        .championship.rounds[this.currentRound].games
         .asObservable();
   }
 
   @computed
-  bool get canDecreaseRound => (jackpot.championship.currentRound > 0);
+  bool get canDecreaseRound => (this.currentRound > 0);
 
   @computed
-  bool get canIncreaseRound => (jackpot.championship.currentRound + 1 <
+  bool get canIncreaseRound => (this.currentRound + 1 <
       jackpot.championship.roundAmount);
 
   @computed
-  Round get currentRound =>
-      jackpot.championship.rounds[jackpot.championship.currentRound];
+  Round get round =>
+      jackpot.championship.rounds[this.currentRound];
 }
