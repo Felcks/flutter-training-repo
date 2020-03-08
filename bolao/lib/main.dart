@@ -51,8 +51,8 @@ void main() {
             textTheme: ButtonTextTheme.primary,
             shape: RoundedRectangleBorder(
                 side: BorderSide(
-                  color: ColorConfig.accentColor,
-                ))),
+              color: ColorConfig.accentColor,
+            ))),
         iconTheme: IconThemeData(
           color: ColorConfig.lightPrimaryColor,
         ),

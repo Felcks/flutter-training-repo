@@ -47,11 +47,13 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         builder: (_) {
           return BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            fixedColor: Colors.black,
+            backgroundColor: Colors.black,
             currentIndex: controller.currentPage,
             onTap: (index) {
               controller.setCurrentPage(index);
             },
+            unselectedItemColor: Colors.white70,
+            selectedItemColor: Colors.white,
             items: [
               BottomNavigationBarItem(
                 icon: new Icon(Icons.radio_button_checked),
