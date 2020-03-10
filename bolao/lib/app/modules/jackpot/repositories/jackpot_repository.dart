@@ -1,6 +1,7 @@
 import 'package:bolao/app/modules/championship/models/championship.dart';
 import 'package:bolao/app/modules/championship/models/game.dart';
 import 'package:bolao/app/modules/championship/models/round.dart';
+import 'package:bolao/app/modules/championship/models/team.dart';
 import 'package:bolao/app/modules/championship/repositories/team_base_repository.dart';
 import 'package:bolao/app/modules/jackpot/models/bet.dart';
 import 'package:bolao/app/modules/jackpot/models/jackpot.dart';
@@ -15,7 +16,7 @@ class JackpotRepository {
     JackpotUser user4 = JackpotUser(name: "Luis", score: 0, roundScore: 5, ranking: 4, rankingsWithoutRoundPoints: 4);
 
     Round round = Round(0, [
-        Game(TeamBaseRepository.flamengo, TeamBaseRepository.atleticoMG),
+        Game.withScore(Team.fromTeam(TeamBaseRepository.flamengo, 3), Team.fromTeam(TeamBaseRepository.atleticoMG, 1)),
         Game(TeamBaseRepository.botafogo, TeamBaseRepository.bahia),
         Game(TeamBaseRepository.goias, TeamBaseRepository.saoPaulo),
         Game(TeamBaseRepository.fortaleza, TeamBaseRepository.athleticoPR),

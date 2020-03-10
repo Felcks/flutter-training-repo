@@ -18,6 +18,11 @@ abstract class _GameBase with Store {
     this.visitingTeam = Team(visitingTeam.name, visitingTeam.imageURL, 0);
   }
 
+   _GameBase.withScore(Team ownerTeam, Team visitingTeam) {
+    this.ownerTeam = ownerTeam;
+    this.visitingTeam = visitingTeam;
+  }
+
   String getScoreboard() {
     return "${ownerTeam.name}\t${ownerTeam.score}\t${visitingTeam.score}\t${visitingTeam.name}";
   }

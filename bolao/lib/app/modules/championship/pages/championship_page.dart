@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'championship_controller.dart';
 
 class ChampionshipPage extends StatefulWidget {
@@ -76,11 +77,11 @@ class _ChampionshipPageState
             },
             items: [
               BottomNavigationBarItem(
-                icon: new Icon(Icons.home),
+                icon: new Icon(MdiIcons.soccerField),
                 title: new Text('Campeonatos'),
               ),
               BottomNavigationBarItem(
-                icon: new Icon(Icons.border_all),
+                icon: new Icon(MdiIcons.soccer),
                 title: new Text('Bolões'),
               ),
             ],

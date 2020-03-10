@@ -8,6 +8,7 @@ import 'package:bolao/app/modules/jackpot/pages/home/home_page_rules.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class HomePage extends StatefulWidget {
   final Jackpot jackpot;
@@ -56,19 +57,19 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             selectedItemColor: Colors.white,
             items: [
               BottomNavigationBarItem(
-                icon: new Icon(Icons.radio_button_checked),
+                icon: new Icon(MdiIcons.trophy),
                 title: new Text('Ranking'),
               ),
               BottomNavigationBarItem(
-                icon: new Icon(Icons.radio_button_checked),
+                icon: new Icon(MdiIcons.swordCross),
                 title: new Text('Rodada'),
               ),
               BottomNavigationBarItem(
-                icon: new Icon(Icons.radio_button_checked),
+                icon: new Icon(MdiIcons.cardsPlayingOutline),
                 title: new Text('Regras'),
               ),
               BottomNavigationBarItem(
-                icon: new Icon(Icons.radio_button_checked),
+                icon: new Icon(MdiIcons.cashMultiple),
                 title: new Text('Aposta'),
               ),
             ],

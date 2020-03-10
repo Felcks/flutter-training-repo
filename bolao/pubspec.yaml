@@ -23,6 +23,7 @@ dependencies:
   flutter_modular: ^0.5.2
   flutter_speed_dial: ^1.2.1
   numberpicker: 1.1.0
+  material_design_icons_flutter: 3.4.4995
   flutter:
     sdk: flutter
 

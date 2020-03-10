@@ -11,6 +11,8 @@ abstract class _TeamBase extends TeamBase with Store  {
 
   _TeamBase(String name, String imageURL, this.score) : super(name, imageURL);
 
+  _TeamBase.fromTeam(TeamBase team, this.score): super(team.name,team.imageURL);
+
   @action
   setScore(int newScore) => score = newScore;
 }
