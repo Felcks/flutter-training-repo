@@ -17,4 +17,8 @@ class PersonService @Autowired constructor(@Qualifier("fakeDao") val personDao: 
     fun getAllPeople(): List<Person>{
         return personDao.selectAllPeople();
     }
+
+    fun getPersonById(id: UUID): Optional<Person>{
+        return personDao.selectPersonById(id)
+    }
 }

@@ -13,4 +13,10 @@ interface PersonDao {
     }
 
     fun selectAllPeople(): List<Person>
+
+    fun selectPersonById(id: UUID): Optional<Person>
+
+    fun deletePersonById(id: UUID): Int
+
+    fun updatePersonById(id: UUID, person: Person): Int
 }

@@ -5,9 +5,9 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository("fakeDao")
-class FakePersonDataAccessService: PersonDao {
+class FakePersonDataAccessService : PersonDao {
 
-    companion object{
+    companion object {
         private val DB: MutableList<Person> = mutableListOf()
     }
 
@@ -23,5 +23,17 @@ class FakePersonDataAccessService: PersonDao {
 
     override fun selectAllPeople(): List<Person> {
         return DB;
+    }
+
+    override fun selectPersonById(id: UUID): Optional<Person> {
+        return DB.stream().filter { it.id?.equals(id) == true }.findFirst()
+    }
+
+    override fun deletePersonById(id: UUID): Int {
+        return 0;
+    }
+
+    override fun updatePersonById(id: UUID, person: Person): Int {
+        return 0;
     }
 }
