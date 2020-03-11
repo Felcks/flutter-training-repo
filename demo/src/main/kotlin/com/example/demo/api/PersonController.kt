@@ -21,7 +21,17 @@ class PersonController @Autowired constructor(val personService: PersonService) 
     }
 
     @GetMapping(path = ["{id}"])
-    fun getPersonById(@PathVariable("id") id: UUID): Person{
-        return personService.getPersonById(id).orElse(null)
+    fun getPersonById(@PathVariable("id") id: UUID): Person?{
+        return personService.getPersonById(id)
+    }
+
+    @DeleteMapping(path = ["{id}"])
+    fun deletePersonById(@PathVariable("id") id: UUID) {
+        personService.deletePersonById(id)
+    }
+
+    @PutMapping(path = ["{id}"])
+    fun putPersonById(@PathVariable("id") id: UUID, @RequestBody personToUpdate: Person){
+        personService.updatePersonById(id, personToUpdate)
     }
 }

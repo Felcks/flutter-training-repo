@@ -18,7 +18,15 @@ class PersonService @Autowired constructor(@Qualifier("fakeDao") val personDao: 
         return personDao.selectAllPeople();
     }
 
-    fun getPersonById(id: UUID): Optional<Person>{
+    fun getPersonById(id: UUID): Person?{
         return personDao.selectPersonById(id)
+    }
+
+    fun deletePersonById(id: UUID): Int{
+        return personDao.deletePersonById(id)
+    }
+
+    fun updatePersonById(id: UUID, person: Person): Int{
+        return personDao.updatePersonById(id, person)
     }
 }

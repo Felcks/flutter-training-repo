@@ -25,15 +25,24 @@ class FakePersonDataAccessService : PersonDao {
         return DB;
     }
 
-    override fun selectPersonById(id: UUID): Optional<Person> {
-        return DB.stream().filter { it.id?.equals(id) == true }.findFirst()
+    override fun selectPersonById(id: UUID): Person? {
+        return DB.first { it.id?.equals(id) == true }
     }
 
     override fun deletePersonById(id: UUID): Int {
-        return 0;
+        val person = selectPersonById(id)
+        DB.remove(person)
+        return 1;
     }
 
     override fun updatePersonById(id: UUID, person: Person): Int {
-        return 0;
+        selectPersonById(id).also {
+            val index = DB.indexOf(it)
+            if(index >= 0){
+                DB[index] = person.apply { this.id = id }
+                return 1;
+            }
+        }
+        return 0
     }
 }
