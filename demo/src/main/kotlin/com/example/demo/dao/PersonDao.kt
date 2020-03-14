@@ -5,9 +5,9 @@ import java.util.*
 
 interface PersonDao {
 
-    fun insertPerson(id: UUID, person: Person): Int
+    fun insertPerson(id: UUID, person: Person): Person
 
-    fun insertPerson(person: Person): Int {
+    fun insertPerson(person: Person): Person {
         val id: UUID = UUID.randomUUID()
         return insertPerson(id, person)
     }

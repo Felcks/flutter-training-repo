@@ -11,13 +11,13 @@ class FakePersonDataAccessService : PersonDao {
         private val DB: MutableList<Person> = mutableListOf()
     }
 
-    override fun insertPerson(id: UUID, person: Person): Int {
-        DB.add(Person(id, person.name))
-        println(person.name)
-        return 1
+    override fun insertPerson(id: UUID, person: Person): Person {
+        val p = person.apply { this.id = id }
+        DB.add(p)
+        return p
     }
 
-    override fun insertPerson(person: Person): Int {
+    override fun insertPerson(person: Person): Person {
         return super.insertPerson(person)
     }
 

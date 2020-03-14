@@ -10,7 +10,7 @@ import java.util.*
 @Service
 class PersonService @Autowired constructor(@Qualifier("fakeDao") val personDao: PersonDao) {
 
-    fun addPerson(person: Person): Int{
+    fun addPerson(person: Person): Person{
         return personDao.insertPerson(person);
     }
 
