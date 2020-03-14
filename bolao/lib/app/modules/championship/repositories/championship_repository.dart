@@ -13,6 +13,23 @@ class ChampionshipRepository {
   List<Championship> championships;
 
   Future<List<Championship>> getChampionships() async {
+
+     var response = await dio.get('championship');
+
+    // List<PokemonModel> list = [];
+
+    //   for(var json in (response.data['results'] as List)){
+    //     PokemonModel pokemon = PokemonModel();
+    //     pokemon.name = json['name']; 
+    //     list.add(pokemon);
+    //   }
+      
+    //    print(list[0].name);
+
+
+    // return list;
+
+
     if (championships == null) {
       Round round = Round(0, [
         Game.withScore(Team.fromTeam(TeamBaseRepository.flamengo, 3), Team.fromTeam(TeamBaseRepository.atleticoMG, 1)),
