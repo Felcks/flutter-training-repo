@@ -1,3 +1,4 @@
+import 'package:bolao/app/modules/championship/pages/championship_page_game.dart';
 import 'package:bolao/app/modules/championship/pages/championship_page_jackpot.dart';
 import 'package:bolao/app/modules/championship/pages/championship_page_list.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class ChampionshipPage extends StatefulWidget {
 class _ChampionshipPageState
     extends ModularState<ChampionshipPage, ChampionshipController>
     with AutomaticKeepAliveClientMixin<ChampionshipPage> {
-  List<Widget> screens = [ChampionshipListPage(), ChampionshipJackpotPage()];
+  List<Widget> screens = [ChampionshipGamePage(), ChampionshipListPage(), ChampionshipJackpotPage()];
 
   @override
   bool get wantKeepAlive => true;
@@ -76,6 +77,10 @@ class _ChampionshipPageState
               controller.setCurrentPage(index);
             },
             items: [
+              BottomNavigationBarItem(
+                icon: new Icon(MdiIcons.animation),
+                title: new Text('Jogos'),
+              ),
               BottomNavigationBarItem(
                 icon: new Icon(MdiIcons.soccerField),
                 title: new Text('Campeonatos'),

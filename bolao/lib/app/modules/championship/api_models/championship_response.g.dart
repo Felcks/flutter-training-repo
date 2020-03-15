@@ -13,7 +13,12 @@ ChampionshipResponse _$ChampionshipResponseFromJson(Map<String, dynamic> json) {
     ..season = json['season'] as String
     ..current_round = json['current_round'] as int
     ..type = json['type'] as int
-    ..title_image_url = json['title_image_url'] as String;
+    ..title_image_url = json['title_image_url'] as String
+    ..round_list = (json['round_list'] as List)
+        ?.map((e) => e == null
+            ? null
+            : RoundResponse.fromJson(e as Map<String, dynamic>))
+        ?.toList();
 }
 
 Map<String, dynamic> _$ChampionshipResponseToJson(
@@ -25,4 +30,5 @@ Map<String, dynamic> _$ChampionshipResponseToJson(
       'current_round': instance.current_round,
       'type': instance.type,
       'title_image_url': instance.title_image_url,
+      'round_list': instance.round_list,
     };
