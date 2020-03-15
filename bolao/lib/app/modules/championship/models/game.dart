@@ -13,12 +13,16 @@ abstract class _GameBase with Store {
   @observable
   Team visitingTeam;
 
-  _GameBase(TeamBase ownerTeam, TeamBase visitingTeam) {
+  String championshipID;
+
+  int roundNumber;
+
+  _GameBase(TeamBase ownerTeam, TeamBase visitingTeam, this.championshipID, this.roundNumber) {
     this.ownerTeam = Team(ownerTeam.name, ownerTeam.imageURL, 0);
     this.visitingTeam = Team(visitingTeam.name, visitingTeam.imageURL, 0);
   }
 
-   _GameBase.withScore(Team ownerTeam, Team visitingTeam) {
+  _GameBase.withScore(Team ownerTeam, Team visitingTeam, this.championshipID, this.roundNumber) {
     this.ownerTeam = ownerTeam;
     this.visitingTeam = visitingTeam;
   }

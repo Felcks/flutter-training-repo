@@ -23,11 +23,14 @@ class ChampionshipResponse {
 
   static Championship toDomain(ChampionshipResponse response) {
     return Championship(
-        response.name,
-        response.season,
-        response.current_round,
-        response.type,
-        response.title_image_url,
-        response.round_list.map((model) => RoundResponse.toDomain(model)));
+      response.name,
+      response.season,
+      response.current_round,
+      response.type,
+      response.title_image_url,
+      response.round_list
+          .map((model) => RoundResponse.toDomain(model))
+          .toList(),
+    );
   }
 }
