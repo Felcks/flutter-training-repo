@@ -237,7 +237,13 @@
     },
     {
       "name": "json_annotation",
-      "rootUri": "file:///home/felcks/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-3.0.1",
+      "rootUri": "file:///home/felcks/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
+      "name": "json_serializable",
+      "rootUri": "file:///home/felcks/flutter/.pub-cache/hosted/pub.dartlang.org/json_serializable-3.2.5",
       "packageUri": "lib/",
       "languageVersion": "2.6"
     },
@@ -476,7 +482,7 @@
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2020-03-08T23:41:22.651784Z",
+  "generated": "2020-03-14T19:12:08.077667Z",
   "generator": "pub",
   "generatorVersion": "2.7.0"
 }

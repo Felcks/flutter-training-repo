@@ -7,6 +7,8 @@ class Championship(@JsonProperty("id")
                    var id: UUID?,
                    @JsonProperty("name")
                    val name: String,
+                   @JsonProperty("season")
+                   val season: String,
                    @JsonProperty("current_round")
                    val currentRound: Int,
                    @JsonProperty("type")

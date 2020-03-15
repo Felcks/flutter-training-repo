@@ -5,6 +5,7 @@ part 'championship.g.dart';
 class Championship = _ChampionshipBase with _$Championship;
 
 abstract class _ChampionshipBase with Store {
+
   @observable
   String name;
 
