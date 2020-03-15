@@ -26,23 +26,6 @@ mixin _$Championship on _ChampionshipBase, Store {
     }, _$nameAtom, name: '${_$nameAtom.name}_set');
   }
 
-  final _$roundAmountAtom = Atom(name: '_ChampionshipBase.roundAmount');
-
-  @override
-  int get roundAmount {
-    _$roundAmountAtom.context.enforceReadPolicy(_$roundAmountAtom);
-    _$roundAmountAtom.reportObserved();
-    return super.roundAmount;
-  }
-
-  @override
-  set roundAmount(int value) {
-    _$roundAmountAtom.context.conditionallyRunInAction(() {
-      super.roundAmount = value;
-      _$roundAmountAtom.reportChanged();
-    }, _$roundAmountAtom, name: '${_$roundAmountAtom.name}_set');
-  }
-
   final _$roundsAtom = Atom(name: '_ChampionshipBase.rounds');
 
   @override
@@ -62,8 +45,7 @@ mixin _$Championship on _ChampionshipBase, Store {
 
   @override
   String toString() {
-    final string =
-        'name: ${name.toString()},roundAmount: ${roundAmount.toString()},rounds: ${rounds.toString()}';
+    final string = 'name: ${name.toString()},rounds: ${rounds.toString()}';
     return '{$string}';
   }
 }

@@ -9,7 +9,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 class ChampionshipModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => Dio()),
+        Bind((i) => Dio(BaseOptions(baseUrl: "http://192.168.0.103:8080/api/v1/"))),
         Bind((i) => ChampionshipRepository(i.get<Dio>())),
         Bind((i) => JackpotRepository()),
         Bind((i) => ChampionshipController(i.get<ChampionshipRepository>(), i.get<JackpotRepository>())),

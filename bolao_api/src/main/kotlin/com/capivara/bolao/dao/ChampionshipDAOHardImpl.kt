@@ -31,7 +31,11 @@ class ChampionshipDAOHardImpl : ChampionshipDAO {
         val championship = Championship(championshipID, "Brasileirão", "2020",
                 0, 0, "https://upload.wikimedia.org/wikipedia/pt/c/cc/Trof%C3%A9u_Brasileir%C3%A3o_2019.png", listOf(round))
 
+        val championship2 = Championship(championshipID, "Copa do Brasil", "2020",
+                0, 0, "https://upload.wikimedia.org/wikipedia/pt/c/cc/Trof%C3%A9u_Brasileir%C3%A3o_2019.png", listOf(round))
+
         championshipList.add(championship)
+        championshipList.add(championship2)
     }
 
     override fun selectAllChampionship(): List<Championship> {

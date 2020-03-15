@@ -1,5 +1,4 @@
 import 'package:bolao/app/modules/championship/models/championship.dart';
-import 'package:bolao/app/utils/color_config.dart';
 import 'package:flutter/material.dart';
 
 class ChampionshipWidget extends StatelessWidget {
@@ -16,7 +15,7 @@ class ChampionshipWidget extends StatelessWidget {
       child: RaisedButton(
         onPressed: onClicked,
         padding: EdgeInsets.all(16),
-        child: Text(item.name),
+        child: Text(item.getTitle()),
       ),
     );
   }

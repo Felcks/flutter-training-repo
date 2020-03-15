@@ -6,7 +6,7 @@ import java.util.*
 class Championship(@JsonProperty("id")
                    var id: UUID?,
                    @JsonProperty("name")
-                   val name: String,
+                   var name: String,
                    @JsonProperty("season")
                    val season: String,
                    @JsonProperty("current_round")

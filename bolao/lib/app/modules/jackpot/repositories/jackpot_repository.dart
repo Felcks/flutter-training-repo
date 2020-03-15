@@ -41,8 +41,8 @@ class JackpotRepository {
         Game(TeamBaseRepository.fluminense, TeamBaseRepository.palmeiras),
       ]);
 
-      Championship championship =
-          Championship("Brasileirão", 0, 2, [round, round2]);
+     Championship championship =
+          Championship("Brasileirão", "2020",  0, 0, "", [round, round2]);
 
     Bet rule1 = Bet(50, BetType.brl);
     Bet rule2 = Bet(10, BetType.game_coin);

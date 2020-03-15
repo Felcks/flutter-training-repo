@@ -84,7 +84,7 @@ abstract class _HomeControllerBase with Store {
 
   @computed
   bool get canIncreaseRound => (this.currentRound + 1 <
-      jackpot.championship.roundAmount);
+      jackpot.championship.rounds.length);
 
   @computed
   Round get round =>

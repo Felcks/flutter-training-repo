@@ -1,9 +1,13 @@
+import 'dart:convert';
+
+import 'package:bolao/app/modules/championship/api_models/championship_response.dart';
 import 'package:bolao/app/modules/championship/models/championship.dart';
 import 'package:bolao/app/modules/championship/models/game.dart';
 import 'package:bolao/app/modules/championship/models/round.dart';
 import 'package:bolao/app/modules/championship/models/team.dart';
 import 'package:bolao/app/modules/championship/repositories/team_base_repository.dart';
 import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 
 class ChampionshipRepository {
   final Dio dio;
@@ -13,26 +17,22 @@ class ChampionshipRepository {
   List<Championship> championships;
 
   Future<List<Championship>> getChampionships() async {
+    var response = await dio.get('championship');
+    List<dynamic> championshipResponseList;
 
-     var response = await dio.get('championship');
-
-    // List<PokemonModel> list = [];
-
-    //   for(var json in (response.data['results'] as List)){
-    //     PokemonModel pokemon = PokemonModel();
-    //     pokemon.name = json['name']; 
-    //     list.add(pokemon);
-    //   }
-      
-    //    print(list[0].name);
-
-
-    // return list;
-
+    if (response.statusCode == 200) {
+      championshipResponseList = response.data
+          .map((model) => ChampionshipResponse.fromJson(model))
+          .toList();
+    } else {
+      print("error api ${response.data}");
+      throw Exception(response.data);
+    }
 
     if (championships == null) {
       Round round = Round(0, [
-        Game.withScore(Team.fromTeam(TeamBaseRepository.flamengo, 3), Team.fromTeam(TeamBaseRepository.atleticoMG, 1)),
+        Game.withScore(Team.fromTeam(TeamBaseRepository.flamengo, 3),
+            Team.fromTeam(TeamBaseRepository.atleticoMG, 1)),
         Game(TeamBaseRepository.botafogo, TeamBaseRepository.bahia),
         Game(TeamBaseRepository.goias, TeamBaseRepository.saoPaulo),
         Game(TeamBaseRepository.fortaleza, TeamBaseRepository.athleticoPR),
@@ -58,10 +58,13 @@ class ChampionshipRepository {
       ]);
 
       Championship championship =
-          Championship("Brasileirão", 0, 2, [round, round2]);
+          Championship("Brasileirão", "2020",  0, 0, "", [round, round2]);
 
       championships = [championship];
     }
-    return championships;
+
+    return championshipResponseList
+        .map((it) => ChampionshipResponse.toDomain(it))
+        .toList();
   }
 }

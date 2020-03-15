@@ -48,7 +48,7 @@ class JackpotRoundPage extends ModularStatelessWidget<JackpotModule> {
                       children: [
                         Text(
                           controller.jackpot.championship
-                              .getTitle(controller.currentRound),
+                              .getRoundTitle(controller.currentRound),
                           style: TextStyle(color: Colors.white),
                         ),
                         SizedBox(
