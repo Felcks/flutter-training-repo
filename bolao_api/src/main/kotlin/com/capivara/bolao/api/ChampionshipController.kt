@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RequestMapping("api/v1/championship")
 @RestController
-class ChampionshioController @Autowired constructor(val championshipService: ChampionshipService) {
+class ChampionshipController @Autowired constructor(val championshipService: ChampionshipService) {
 
     @GetMapping
     fun getAllChampionship(): List<Championship>{

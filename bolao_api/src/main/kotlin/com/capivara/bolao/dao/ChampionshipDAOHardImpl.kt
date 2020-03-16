@@ -18,8 +18,8 @@ class ChampionshipDAOHardImpl : ChampionshipDAO {
 
         val championshipID: UUID = UUID.randomUUID()
 
-        val flamengo = Team(1, "Flamengo", "https://ssl.gstatic.com/onebox/media/sports/logos/orE554NToSkH6nuwofe7Yg_96x96.png")
-        val portuguesa = Team(2, "Portuguesa", "https://ssl.gstatic.com/onebox/media/sports/logos/IvRu9o7LgtB-oRBZDb319w_96x96.png")
+        val flamengo = Team(UUID.randomUUID(), "Flamengo", "https://ssl.gstatic.com/onebox/media/sports/logos/orE554NToSkH6nuwofe7Yg_96x96.png")
+        val portuguesa = Team(UUID.randomUUID(), "Portuguesa", "https://ssl.gstatic.com/onebox/media/sports/logos/IvRu9o7LgtB-oRBZDb319w_96x96.png")
 
         val flamengoGameTeam = GameTeam(UUID.randomUUID(), flamengo, 0)
         val portuguesaGameTeam = GameTeam(UUID.randomUUID(), portuguesa, 0)
