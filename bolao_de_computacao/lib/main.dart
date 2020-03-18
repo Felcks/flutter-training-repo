@@ -3,6 +3,7 @@ import 'app/config/app_config.dart';
 import 'package:bolao_de_computacao/app/pages/home/home.dart';
 
 void main() {
+
   var configuredApp = new AppConfig(
       appName: 'Bolão de Computação',
       flavorName: 'Bolão de Computação',
@@ -16,28 +17,39 @@ void main() {
           foregroundColor: Colors.white,
           backgroundColor: Colors.black,
         ),
-        textTheme: TextTheme(
-          body1: TextStyle(backgroundColor: Colors.white70),
-        ),
         appBarTheme: AppBarTheme(
           elevation: 0,
           color: Colors.black,
           textTheme: TextTheme(
-            title: TextStyle(color: Colors.white, fontSize: 20),
-            body1: TextStyle(color: Colors.white),
-            button: TextStyle(color: Colors.white),
+            title: TextStyle(
+                color: Colors.white,
+                fontSize: 20
+            ),
+            body1: TextStyle(
+                color: Colors.white
+            ),
+            button: TextStyle(
+                color: Colors.white
+            ),
           ),
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(
+              color: Colors.white
+          ),
         ),
         buttonTheme: ButtonThemeData(
             buttonColor: Color(0xff000000),
             textTheme: ButtonTextTheme.primary,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(32),
-                side: BorderSide(color: Color(0xaa000000)))),
-        iconTheme: IconThemeData(color: Colors.white),
+                side: BorderSide(color: Color(0xaa000000))
+            )
+        ),
+        iconTheme: IconThemeData(
+            color: Colors.white
+        ),
       ),
-      child: Home());
+      child: Home()
+  );
 
   runApp(MaterialApp(
     title: configuredApp.appName,

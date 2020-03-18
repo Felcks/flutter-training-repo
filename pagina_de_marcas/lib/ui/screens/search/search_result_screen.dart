@@ -206,16 +206,15 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           break;
                         case ConnectionState.waiting:
                           return Expanded(
-                            child: Center(
-                              child: SizedBox(
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 5,
-                                ),
-                                width: 40,
-                                height: 40,
+                              child: Center(
+                            child: SizedBox(
+                              child: CircularProgressIndicator(
+                                strokeWidth: 5,
                               ),
-                            )
-                          );
+                              width: 40,
+                              height: 40,
+                            ),
+                          ));
                           break;
                         case ConnectionState.active:
                           print("active");
@@ -223,11 +222,16 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         case ConnectionState.done:
                           if (snapshot.hasError) {
                             return Center(
-                              child: Text(
-                                  snapshot.error.toString()
+                              child: Text(snapshot.error.toString()),
+                            );
+                          } else if (snapshot.data.Products.length <= 0){
+                            return Expanded(
+                              child: Center(
+                                child: Text("Não há produtos disponíveis."),
                               ),
                             );
                           } else {
+                            print(snapshot.data.Products);
                             return getGridView(snapshot);
                           }
                           break;
