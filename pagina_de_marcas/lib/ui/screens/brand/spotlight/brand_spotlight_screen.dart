@@ -28,11 +28,9 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
 
   @override
   void didChangeDependencies() {
-  
     if (api == null) {
       this.api = Api(context: this.context);
       brandList = _getBrandList();
-
     }
     super.didChangeDependencies();
   }
@@ -43,9 +41,6 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
       backgroundColor: Colors.white,
       appBar: PlatformAppBar(
         title: Text("Marcas"),
-        android: (_) => MaterialAppBarData(
-          title: Text("aaa")
-        ),
         ios: (_) => CupertinoNavigationBarData(),
       ),
       android: (_) => MaterialScaffoldData(),
@@ -59,13 +54,12 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                   break;
                 case ConnectionState.waiting:
                   return Center(
-                      child: SizedBox(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 5,
+                    child: SizedBox(
+                      child: PlatformCircularProgressIndicator(),
+                      width: 40,
+                      height: 40,
                     ),
-                    width: 40,
-                    height: 40,
-                  ));
+                  );
                   break;
                 case ConnectionState.active:
                   print("active");
@@ -182,7 +176,7 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                             ),
                             padding: EdgeInsets.all(16),
                           ),
-                        )
+                        ),
                       ],
                     );
                   }
