@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pagina_de_marcas/ui/screens/brand/spotlight/brand_spotlight_screen.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:pagina_de_marcas/ui/screens/search/search_result_screen.dart';
-
-import 'colors.dart';
 
 import 'config/app_config.dart';
 
@@ -16,11 +14,12 @@ class MyApp extends StatelessWidget {
     // environment specific configuration
     var config = AppConfig.of(context);
 
-    return new  MaterialApp(
+    return new PlatformApp(
       title: config.appName,
-      theme: config.themeData,
+      android: (_) => MaterialAppData(
+        theme: config.themeData,
+      ),
       home: SearchResultScreen("Calça"),
     );
   }
 }
-
