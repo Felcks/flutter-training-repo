@@ -203,13 +203,25 @@ class _BrandListScreenState extends State<BrandListScreen> {
                                     BrandResponse brand =
                                         iOSList[section][index];
 
-                                    return Container(
-                                      padding: EdgeInsets.all(16),
-                                      child: Text(
-                                        brand.Name,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          platformPageRoute(
+                                            builder: (context) =>
+                                                SearchResultScreen(brand.Name),
+                                            context: context,
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.all(16),
+                                        child: Text(
+                                          brand.Name,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                          ),
                                         ),
                                       ),
                                     );

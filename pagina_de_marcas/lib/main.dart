@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
 
     return new PlatformApp(
       title: config.appName,
+      debugShowCheckedModeBanner: false,
       android: (_) => MaterialAppData(
         theme: config.themeData,
       ),
