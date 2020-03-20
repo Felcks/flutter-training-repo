@@ -19,6 +19,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       android: (_) => MaterialAppData(
         theme: config.themeData,
+        debugShowCheckedModeBanner: false
+      ),
+      ios: (_) => CupertinoAppData(
+        debugShowCheckedModeBanner: false
       ),
       home: SearchResultScreen("Calça"),
     );

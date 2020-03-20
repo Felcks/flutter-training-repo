@@ -202,115 +202,127 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         ),
       ),
       ios: (_) => CupertinoPageScaffoldData(
-        // bottomTabBar: PlatformNavBar(
-        // currentIndex: 4,
-        // items: [
-        //   BottomNavigationBarItem(
-        //     icon: Icon(PlatformIcons(context).home),
-        //     title: Text("Home"),
-        //   ),
-        //   BottomNavigationBarItem(
-        //     icon: Icon(IconData(0xF394, fontFamily: "CupertinoIcons")),
-        //     title: Text("Categorias"),
-        //   ),
-        //   BottomNavigationBarItem(
-        //     icon: Icon(IconData(0xF4B2, fontFamily: "CupertinoIcons")),
-        //     title: Text("Favoritos"),
-        //   ),
-        //   BottomNavigationBarItem(
-        //     icon: Icon(IconData(0xF3ED, fontFamily: "CupertinoIcons")),
-        //     title: Text("Sacola"),
-        //   ),
-        //   BottomNavigationBarItem(
-        //     icon: Icon(IconData(0xF469, fontFamily: "CupertinoIcons")),
-        //     title: Text("Mais"),
-        //   ),
-        // ],
-      ),
-      body: Container(
-        color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 4),
-              child: Row(
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Text("Você está em:"),
-                      Text(
-                        widget.query,
-                        style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
+
+          // bottomTabBar: PlatformNavBar(
+          // currentIndex: 4,
+          // items: [
+          //   BottomNavigationBarItem(
+          //     icon: Icon(PlatformIcons(context).home),
+          //     title: Text("Home"),
+          //   ),
+          //   BottomNavigationBarItem(
+          //     icon: Icon(IconData(0xF394, fontFamily: "CupertinoIcons")),
+          //     title: Text("Categorias"),
+          //   ),
+          //   BottomNavigationBarItem(
+          //     icon: Icon(IconData(0xF4B2, fontFamily: "CupertinoIcons")),
+          //     title: Text("Favoritos"),
+          //   ),
+          //   BottomNavigationBarItem(
+          //     icon: Icon(IconData(0xF3ED, fontFamily: "CupertinoIcons")),
+          //     title: Text("Sacola"),
+          //   ),
+          //   BottomNavigationBarItem(
+          //     icon: Icon(IconData(0xF469, fontFamily: "CupertinoIcons")),
+          //     title: Text("Mais"),
+          //   ),
+          // ],
+          ),
+      body: SafeArea(
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              PlatformWidget(
+                android: (_) => Container(),
+                ios: (_) => Padding(
+                  padding:
+                      EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[Text("Ordenar"), Text("Filtrar")],
                   ),
-                  Spacer(),
-                  Column(
-                    children: <Widget>[
-                      Observer(builder: (_) {
-                        return Text(
-                          '${productAmountController.productAmount}',
-                          style: TextStyle(color: Colors.grey),
-                        );
-                      }),
-                      Text(
-                        "resultados",
-                        style: TextStyle(color: Colors.grey),
-                      )
-                    ],
-                  )
-                ],
+                ),
               ),
-            ),
-            Container(
-              child: FutureBuilder(
-                future: searchResponse,
-                builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                      break;
-                    case ConnectionState.waiting:
-                      return Expanded(
-                          child: Center(
-                        child: SizedBox(
-                          child: PlatformCircularProgressIndicator(),
-                          width: 40,
-                          height: 40,
+              Padding(
+                padding:
+                    EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+                child: Row(
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        PlatformText("Você está em:"),
+                        PlatformText(
+                          widget.query,
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
-                      ));
-                      break;
-                    case ConnectionState.active:
-                      print("active");
-                      break;
-                    case ConnectionState.done:
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: Text(snapshot.error.toString()),
-                        );
-                      } else if (snapshot.data.Products.length <= 0) {
-                        return Expanded(
-                          child: Center(
-                            child: Text("Não há produtos disponíveis."),
-                          ),
-                        );
-                      } else {
-                        print(snapshot.data.Products);
-                        return getGridView(snapshot);
-                      }
-                      break;
-                  }
-                  return Center(
-                    child: Text(""),
-                  );
-                },
+                      ],
+                    ),
+                    Spacer(),
+                    Column(
+                      children: <Widget>[
+                        Observer(builder: (_) {
+                          return Text(
+                            '${productAmountController.productAmount}',
+                            style: TextStyle(color: Colors.grey),
+                          );
+                        }),
+                        Text(
+                          "resultados",
+                          style: TextStyle(color: Colors.grey),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+              Container(
+                child: FutureBuilder(
+                  future: searchResponse,
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                        break;
+                      case ConnectionState.waiting:
+                        return Expanded(
+                            child: Center(
+                          child: SizedBox(
+                            child: PlatformCircularProgressIndicator(),
+                            width: 40,
+                            height: 40,
+                          ),
+                        ));
+                        break;
+                      case ConnectionState.active:
+                        print("active");
+                        break;
+                      case ConnectionState.done:
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text(snapshot.error.toString()),
+                          );
+                        } else if (snapshot.data.Products.length <= 0) {
+                          return Expanded(
+                            child: Center(
+                              child: Text("Não há produtos disponíveis."),
+                            ),
+                          );
+                        } else {
+                          return getGridView(snapshot);
+                        }
+                        break;
+                    }
+                    return Center(
+                      child: Text(""),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

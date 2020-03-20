@@ -48,7 +48,8 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
         ios: (_) => CupertinoNavigationBarData(),
       ),
       android: (_) => MaterialScaffoldData(),
-      body: Container(
+      body: SafeArea(
+        child: Container(
           color: ColorConfig.lightPrimaryColor,
           padding: EdgeInsets.all(16),
           child: FutureBuilder(
@@ -75,6 +76,24 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                       child: Text(snapshot.error.toString()),
                     );
                   } else {
+                    if (snapshot.data.isEmpty) {
+                      return Stack(
+                        children: <Widget>[
+                          Center(
+                            child: Text(
+                              "Nenhuma marca em destaque",
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [getButtonSeeAllBrands()],
+                          ),
+                        ],
+                      );
+                    }
+
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
@@ -154,26 +173,7 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                             },
                           ),
                         ),
-                        Theme(
-                          data: Theme.of(context).copyWith(
-                            buttonTheme: (ScreenMaster.brandSpotlightElements
-                                    .getButton01()) ??
-                                Buttons.nonFilled(),
-                          ),
-                          child: RaisedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => BrandListScreen()));
-                            },
-                            child: Text(
-                              "VER TODAS AS MARCAS",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            padding: EdgeInsets.all(16),
-                          ),
-                        ),
+                        getButtonSeeAllBrands()
                       ],
                     );
                   }
@@ -183,7 +183,29 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                 child: Text(""),
               );
             },
-          )),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget getButtonSeeAllBrands() {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        buttonTheme: (ScreenMaster.brandSpotlightElements.getButton01()) ??
+            Buttons.nonFilled(),
+      ),
+      child: RaisedButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => BrandListScreen()));
+        },
+        child: Text(
+          "VER TODAS AS MARCAS",
+          style: TextStyle(fontSize: 16),
+        ),
+        padding: EdgeInsets.all(16),
+      ),
     );
   }
 }

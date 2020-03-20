@@ -171,6 +171,11 @@ class _BrandListScreenState extends State<BrandListScreen> {
                             child: Stack(
                               children: <Widget>[
                                 CupertinoTextField(
+                                  onChanged: (value) {
+                                    setState(() {
+                                      filtered = value;
+                                    });
+                                  },
                                   placeholder: "Pesquise por uma marca",
                                   textAlign: TextAlign.left,
                                   decoration: BoxDecoration(
@@ -208,7 +213,6 @@ class _BrandListScreenState extends State<BrandListScreen> {
         ),
       );
     }
-
     List<List<BrandResponse>> iOSList = arrangeItemsForiOS(list);
 
     return Expanded(
@@ -217,9 +221,13 @@ class _BrandListScreenState extends State<BrandListScreen> {
           ios: (_) => FlutterSectionListView(
             numberOfSection: () => iOSList.length,
             numberOfRowsInSection: (section) {
+              if (section >= iOSList.length) return 0;
+
               return iOSList[section].length;
             },
             sectionWidget: (section) {
+              if (section >= iOSList.length) return Container();
+
               BrandResponse brand = iOSList[section][0];
               return Container(
                 child: Padding(
@@ -233,6 +241,10 @@ class _BrandListScreenState extends State<BrandListScreen> {
               );
             },
             rowWidget: (section, int index) {
+              if (section >= iOSList.length) return Container();
+
+              if (index >= iOSList[section].length) return Container();
+
               BrandResponse brand = iOSList[section][index];
 
               return GestureDetector(
