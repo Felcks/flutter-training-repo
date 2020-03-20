@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:pagina_de_marcas/ui/screens/brand/spotlight/brand_spotlight_screen.dart';
-
-import 'colors.dart';
-
 import 'config/app_config.dart';
 
 // We can remove this line here:

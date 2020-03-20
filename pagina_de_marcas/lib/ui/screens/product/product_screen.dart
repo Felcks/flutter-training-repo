@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:pagina_de_marcas/config/app_config.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
 import 'package:pagina_de_marcas/model/product/product_response.dart';
@@ -42,23 +44,71 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        title: Text((activated) ? widget.product.Name : ""),
-        titleSpacing: 0,
-        backgroundColor: (activated) ? Colors.white : Colors.transparent,
-        elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
+    return PlatformScaffold(
+      android: (_) => MaterialScaffoldData(
+        extendBodyBehindAppBar: true,
+        bottomNavBar: Container(
+          height: kBottomNavigationBarHeight * 2,
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: kBottomNavigationBarHeight,
+                color: Colors.white,
+                padding: EdgeInsets.all(8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "Total",
+                      style: TextStyle(fontSize: 18, color: Colors.grey),
+                    ),
+                    Text(
+                      widget.product.Skus[0].Sellers[0].Price.toString(),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Theme.of(context).accentColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: kBottomNavigationBarHeight,
+                color: Theme.of(context).primaryColor,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "COMPRAR",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {},
-          )
-        ],
+        ),
+      ),
+      ios: (_) => CupertinoPageScaffoldData(),
+      appBar: PlatformAppBar(
+        title: Text((activated) ? widget.product.Name : ""),
+        android: (_) => MaterialAppBarData(
+          titleSpacing: 0,
+          elevation: 0.0,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {},
+            )
+          ],
+        ),
+        backgroundColor: (activated) ? Colors.white : Colors.transparent,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.only(top: kToolbarHeight / 2),
@@ -75,10 +125,8 @@ class _ProductScreenState extends State<ProductScreen> {
                 children: <Widget>[
                   ProgressiveImage(
                     placeholder: AssetImage('assets/a.png'),
-                    // size: 1.87KB
                     thumbnail:
                         NetworkImage(widget.product.Skus[0].Images[0].ImageUrl),
-                    // size: 1.29MB
                     image:
                         NetworkImage(widget.product.Skus[0].Images[0].ImageUrl),
                     fit: BoxFit.contain,
@@ -88,83 +136,24 @@ class _ProductScreenState extends State<ProductScreen> {
                 ],
               ),
               Container(
-                  padding: EdgeInsets.all(16),
-                  color: Colors.white,
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        widget.product.Name,
-                        style: TextStyle(fontSize: 22, color: Colors.black),
-                      ),
-                    ],
-                  )
-              )
+                padding: EdgeInsets.all(16),
+                color: Colors.white,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      widget.product.Name,
+                      style: TextStyle(fontSize: 22, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        height: kBottomNavigationBarHeight * 2,
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: kBottomNavigationBarHeight,
-              color: Colors.white,
-              padding: EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "Total",
-                    style: TextStyle(fontSize: 18, color: Colors.grey),
-                  ),
-                  Text(
-                    widget.product.Skus[0].Sellers[0].Price.toString(),
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: kBottomNavigationBarHeight,
-              color: Theme.of(context).primaryColor,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "COMPRAR",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-//      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-//      floatingActionButton: FloatingActionButton.extended(
-//        onPressed: () {
-//          // Add your onPressed code here!
-//        },
-//        label: Padding(
-//          padding: EdgeInsets.all(8),
-//          child: Text(
-//            "Comprar",
-//            style:  TextStyle(
-//              fontSize: 18
-//            ),
-//          ),
-//        ),
-//        backgroundColor: MyColors.pink,
-//      ),
     );
   }
 }

@@ -174,31 +174,6 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      bottomNavBar: PlatformNavBar(
-        currentIndex: 4,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(PlatformIcons(context).home),
-            title: Text("Home"),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(IconData(0xF394, fontFamily: "CupertinoIcons")),
-            title: Text("Categorias"),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(IconData(0xF4B2, fontFamily: "CupertinoIcons")),
-            title: Text("Favoritos"),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(IconData(0xF3ED, fontFamily: "CupertinoIcons")),
-            title: Text("Sacola"),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(IconData(0xF469, fontFamily: "CupertinoIcons")),
-            title: Text("Mais"),
-          ),
-        ],
-      ),
       appBar: PlatformAppBar(
         title: Text("Produtos"),
       ),
@@ -227,7 +202,30 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         ),
       ),
       ios: (_) => CupertinoPageScaffoldData(
-        navigationBar: CupertinoNavigationBar(),
+        // bottomTabBar: PlatformNavBar(
+        // currentIndex: 4,
+        // items: [
+        //   BottomNavigationBarItem(
+        //     icon: Icon(PlatformIcons(context).home),
+        //     title: Text("Home"),
+        //   ),
+        //   BottomNavigationBarItem(
+        //     icon: Icon(IconData(0xF394, fontFamily: "CupertinoIcons")),
+        //     title: Text("Categorias"),
+        //   ),
+        //   BottomNavigationBarItem(
+        //     icon: Icon(IconData(0xF4B2, fontFamily: "CupertinoIcons")),
+        //     title: Text("Favoritos"),
+        //   ),
+        //   BottomNavigationBarItem(
+        //     icon: Icon(IconData(0xF3ED, fontFamily: "CupertinoIcons")),
+        //     title: Text("Sacola"),
+        //   ),
+        //   BottomNavigationBarItem(
+        //     icon: Icon(IconData(0xF469, fontFamily: "CupertinoIcons")),
+        //     title: Text("Mais"),
+        //   ),
+        // ],
       ),
       body: Container(
         color: Colors.white,
