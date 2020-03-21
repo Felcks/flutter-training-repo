@@ -14,7 +14,7 @@ class BrandPageApp extends StatelessWidget {
     var config = AppConfig.of(context);
 
     return PlatformProvider(
-      initialPlatform: TargetPlatform.android,
+      initialPlatform: TargetPlatform.iOS,
       builder: (BuildContext context) => PlatformApp(
         debugShowCheckedModeBanner: false,
         android: (_) => MaterialAppData(

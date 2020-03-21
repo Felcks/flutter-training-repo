@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pagina_de_marcas/api/api.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
@@ -155,8 +156,47 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     );
   }
 
+  Widget getStaggeredGridView(AsyncSnapshot<dynamic> snapshot) {
+    return Expanded(
+      child: StaggeredGridView.countBuilder(
+        controller: _floatActionButtonController,
+        itemCount: snapshot.data.Products.length,
+        crossAxisCount: 2,
+        staggeredTileBuilder: (index)  {
+          ProductResponse product = snapshot.data.Products[index];
+          return StaggeredTile.count(1, getCardSize(product));
+        },
+        itemBuilder: (BuildContext context, int index) {
+          ProductResponse product = snapshot.data.Products[index];
+          SkuResponse sku = product.Skus[0];
+
+          return PlatformWidget(
+            android: (_) => InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProductScreen(product)));
+              },
+              child: ProductCard().getDefaultProductCard(product, context),
+            ),
+            ios: (_) => GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProductScreen(product)));
+              },
+              child: ProductCard().getDefaultProductCard(product, context),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   double getCardAspectRatio() {
-    double baseAspectRatio = 0.55;
+    double baseAspectRatio = 0.53;
     double brandAspectRatio = (FlagConfig.cardFlag.showBrand) ? 0.05 : 0;
     double starsAspectRatio = (FlagConfig.cardFlag.showStars) ? 0.05 : 0;
     double listPriceAspectRatio =
@@ -170,6 +210,20 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         listPriceAspectRatio -
         priceAspectRatio -
         buyButtonAspectRatio;
+  }
+
+  double getCardSize(ProductResponse product) {
+
+    double baseSize = 2.3;
+    double lineSize = 0.1;
+    double amountLines = product.Name.length / 25;
+
+    double listPriceSize = 0.0;
+    double listPrice = product.Skus[0].Sellers[0].ListPrice;
+    if(listPrice != null && listPrice > 0)
+      listPriceSize = 0.1;
+
+    return baseSize + (lineSize * amountLines) + listPriceSize;
   }
 
   @override
@@ -201,7 +255,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
             onPressed: () {
               // Add your onPressed code here!
             },
-            child: Icon(Icons.filter_list),
+            child: Icon(MdiIcons.sortVariant),
             backgroundColor: Theme.of(context).primaryColor,
           ),
         ),
@@ -294,7 +348,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             ),
                           );
                         } else {
-                          return getGridView(snapshot);
+                          return getStaggeredGridView(snapshot);
                         }
                         break;
                     }

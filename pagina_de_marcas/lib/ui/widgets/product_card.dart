@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:money/money.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
 import 'package:pagina_de_marcas/config/flag_config.dart';
@@ -14,7 +15,6 @@ import 'package:progressive_image/progressive_image.dart';
 import 'buttons.dart';
 
 class ProductCard {
-
   Widget getDefaultProductCard(ProductResponse product, BuildContext context) {
     SkuResponse sku = product.getFirstSkuAvailableOrFirstAnyway();
 
@@ -50,16 +50,14 @@ class ProductCard {
         ));
   }
 
-  Widget getImage(ProductResponse product){
-
+  Widget getImage(ProductResponse product) {
     SkuResponse sku = product.getFirstSkuAvailableOrFirstAnyway();
 
     return ProgressiveImage(
       fit: BoxFit.contain,
       placeholder: AssetImage('assets/a.png'),
       // size: 1.87KB
-      thumbnail:
-      NetworkImage(sku.Images[0].ImageUrl),
+      thumbnail: NetworkImage(sku.Images[0].ImageUrl),
       // size: 1.29MB
       image: NetworkImage(sku.Images[0].ImageUrl),
       height: 300,
@@ -79,25 +77,22 @@ class ProductCard {
           maxLines: 1,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 16
-          ),
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
         ),
       ),
     );
   }
 
   Widget getTitle(ProductResponse product) {
-    return Padding(
-      padding: EdgeInsets.all(16),
-      child: SizedBox(
-        height: 30,
-        child: Text(
+    return Flexible(
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: PlatformText(
           product.Name,
-          maxLines: 3,
+          maxLines: 4,
           textAlign: TextAlign.center,
           style: TextStyle(
+            fontSize: 14,
             color: Colors.black,
           ),
         ),
@@ -213,19 +208,20 @@ class ProductCard {
       );
     } else {
       return Theme(
-          data: Theme.of(context).copyWith(
-            buttonTheme:
-                (ScreenMaster.searchResultElements.getButtonUnavailable()) ??
-                    Buttons.unavailable(),
+        data: Theme.of(context).copyWith(
+          buttonTheme:
+              (ScreenMaster.searchResultElements.getButtonUnavailable()) ??
+                  Buttons.unavailable(),
+        ),
+        child: RaisedButton(
+          onPressed: () {},
+          child: Text(
+            "INDISPONÍVEL",
+            style: TextStyle(color: Colors.white, fontSize: 16),
           ),
-          child: RaisedButton(
-            onPressed: () {},
-            child: Text(
-              "INDISPONÍVEL",
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
-            padding: EdgeInsets.all(8),
-          ));
+          padding: EdgeInsets.all(8),
+        ),
+      );
     }
   }
 }

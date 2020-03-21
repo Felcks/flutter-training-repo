@@ -47,6 +47,7 @@ class _ProductScreenState extends State<ProductScreen> {
     return PlatformScaffold(
       android: (_) => MaterialScaffoldData(
         extendBodyBehindAppBar: true,
+        extendBody: true,
         bottomNavBar: Container(
           height: kBottomNavigationBarHeight * 2,
           child: Column(
@@ -113,50 +114,59 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
         backgroundColor: (activated) ? Colors.white : Colors.transparent,
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.only(top: kToolbarHeight / 2),
-          controller: _scrollController,
-          child: Container(
-            color: ColorConfig.lightPrimaryColor,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Column(
+      body: PlatformWidget(
+        ios: (_) => SafeArea(
+          child: getScrollView(),
+        ),
+        android: (_) => Container(
+          child: getScrollView(),
+        ),
+      ),
+    );
+  }
+
+  Widget getScrollView() {
+    return SingleChildScrollView(
+      padding: EdgeInsets.only(top: kToolbarHeight / 2),
+      controller: _scrollController,
+      child: Container(
+        color: ColorConfig.lightPrimaryColor,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: <Widget>[
+            Stack(
+              alignment: Alignment.center,
+              overflow: Overflow.visible,
               children: <Widget>[
-                Stack(
-                  alignment: Alignment.center,
-                  overflow: Overflow.visible,
-                  children: <Widget>[
-                    ProgressiveImage(
-                      placeholder: AssetImage('assets/a.png'),
-                      thumbnail: NetworkImage(
-                          widget.product.Skus[0].Images[0].ImageUrl),
-                      image: NetworkImage(
-                          widget.product.Skus[0].Images[0].ImageUrl),
-                      fit: BoxFit.contain,
-                      height: 450,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: EdgeInsets.all(16),
-                  color: Colors.white,
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        widget.product.Name,
-                        style: TextStyle(fontSize: 22, color: Colors.black),
-                      ),
-                    ],
-                  ),
+                ProgressiveImage(
+                  placeholder: AssetImage('assets/a.png'),
+                  thumbnail:
+                      NetworkImage(widget.product.Skus[0].Images[0].ImageUrl),
+                  image:
+                      NetworkImage(widget.product.Skus[0].Images[0].ImageUrl),
+                  fit: BoxFit.contain,
+                  height: 450,
+                  width: MediaQuery.of(context).size.width,
                 ),
               ],
             ),
-          ),
+            Container(
+              padding: EdgeInsets.all(16),
+              color: Colors.white,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    widget.product.Name,
+                    style: TextStyle(fontSize: 22, color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
