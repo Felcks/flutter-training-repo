@@ -45,7 +45,9 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
         android: (_) => MaterialAppBarData(
           elevation: 0,
         ),
-        ios: (_) => CupertinoNavigationBarData(),
+        ios: (_) => CupertinoNavigationBarData(
+          backgroundColor: CupertinoColors.white,
+        ),
       ),
       android: (_) => MaterialScaffoldData(),
       body: SafeArea(
@@ -61,7 +63,11 @@ class _BrandSpotlightScreenState extends State<BrandSpotlightScreen> {
                 case ConnectionState.waiting:
                   return Center(
                     child: SizedBox(
-                      child: PlatformCircularProgressIndicator(),
+                      child: PlatformCircularProgressIndicator(
+                        ios: (_) => CupertinoProgressIndicatorData(
+                          radius: 15
+                        ),
+                      ),
                       width: 40,
                       height: 40,
                     ),

@@ -83,6 +83,10 @@ class _BrandListScreenState extends State<BrandListScreen> {
         android: (_) => MaterialAppBarData(
           elevation: 0,
         ),
+        ios: (_) => CupertinoNavigationBarData(
+          actionsForegroundColor: ColorConfig.accentColor,
+          backgroundColor: CupertinoColors.white,
+        ),
       ),
       body: SafeArea(
         child: Container(
@@ -97,7 +101,11 @@ class _BrandListScreenState extends State<BrandListScreen> {
                 case ConnectionState.waiting:
                   return Center(
                     child: SizedBox(
-                      child: PlatformCircularProgressIndicator(),
+                      child: PlatformCircularProgressIndicator(
+                        ios: (_) => CupertinoProgressIndicatorData(
+                          radius: 15,
+                        ),
+                      ),
                       width: 40,
                       height: 40,
                     ),

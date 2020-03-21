@@ -7,6 +7,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pagina_de_marcas/api/api.dart';
+import 'package:pagina_de_marcas/config/color_config.dart';
 import 'package:pagina_de_marcas/config/flag_config.dart';
 import 'package:pagina_de_marcas/controller/product_controller.dart';
 import 'package:pagina_de_marcas/model/product/product_response.dart';
@@ -176,6 +177,10 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     return PlatformScaffold(
       appBar: PlatformAppBar(
         title: Text("Produtos"),
+         ios: (_) => CupertinoNavigationBarData(
+          actionsForegroundColor: ColorConfig.accentColor,
+          backgroundColor: CupertinoColors.white,
+        ),
       ),
       android: (_) => MaterialScaffoldData(
         appBar: AppBar(
@@ -201,33 +206,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
           ),
         ),
       ),
-      ios: (_) => CupertinoPageScaffoldData(
-
-          // bottomTabBar: PlatformNavBar(
-          // currentIndex: 4,
-          // items: [
-          //   BottomNavigationBarItem(
-          //     icon: Icon(PlatformIcons(context).home),
-          //     title: Text("Home"),
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(IconData(0xF394, fontFamily: "CupertinoIcons")),
-          //     title: Text("Categorias"),
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(IconData(0xF4B2, fontFamily: "CupertinoIcons")),
-          //     title: Text("Favoritos"),
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(IconData(0xF3ED, fontFamily: "CupertinoIcons")),
-          //     title: Text("Sacola"),
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(IconData(0xF469, fontFamily: "CupertinoIcons")),
-          //     title: Text("Mais"),
-          //   ),
-          // ],
-          ),
+      ios: (_) => CupertinoPageScaffoldData(),
       body: SafeArea(
         child: Container(
           color: Colors.white,
@@ -290,7 +269,11 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         return Expanded(
                             child: Center(
                           child: SizedBox(
-                            child: PlatformCircularProgressIndicator(),
+                            child: PlatformCircularProgressIndicator(
+                              ios: (_) => CupertinoProgressIndicatorData(
+                                radius: 15,
+                              ),
+                            ),
                             width: 40,
                             height: 40,
                           ),
