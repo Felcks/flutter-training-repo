@@ -4,6 +4,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:pagina_de_marcas/config/app_config.dart';
 import 'package:pagina_de_marcas/config/color_config.dart';
 import 'package:pagina_de_marcas/model/product/product_response.dart';
+import 'package:pagina_de_marcas/model/product/seller_response.dart';
 import 'package:progressive_image/progressive_image.dart';
 
 import '../../../colors.dart';
@@ -116,7 +117,15 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
       body: PlatformWidget(
         ios: (_) => SafeArea(
-          child: getScrollView(),
+          child: Stack(
+            children: <Widget>[
+              getScrollView(),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: getTotalAndBuyButton(),
+              )
+            ],
+          ),
         ),
         android: (_) => Container(
           child: getScrollView(),
@@ -168,6 +177,55 @@ class _ProductScreenState extends State<ProductScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget getTotalAndBuyButton() {
+
+    SellerResponse seller = widget.product.getFirstSkuAvailableOrFirstAnyway().getFirstSellerWithQuantity();
+
+    return Container(
+      height: kBottomNavigationBarHeight * 2,
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: kBottomNavigationBarHeight,
+            color: Colors.white,
+            padding: EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "Total",
+                  style: TextStyle(fontSize: 18, color: Colors.grey),
+                ),
+                Text(
+                  seller.Price.toString(),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: ColorConfig.accentColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: kBottomNavigationBarHeight,
+            color: ColorConfig.darkPrimaryColor,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "COMPRAR",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
